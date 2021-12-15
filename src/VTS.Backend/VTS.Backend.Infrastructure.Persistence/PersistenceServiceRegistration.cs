@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using VTS.Backend.Core.Application.Contracts;
+using VTS.Backend.Infrastructure.Persistence.Repositories;
 
 namespace VTS.Backend.Infrastructure.Persistence
 {
@@ -13,6 +12,11 @@ namespace VTS.Backend.Infrastructure.Persistence
         {
             services.AddDbContext<VtsDbContext>(options =>
                 options.UseSqlite(configuration["SqliteDatabaseSettings:ConnectionString"]));
+
+            services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
+
+            services.AddScoped<IVehiclePositionRepository, VehiclePositionRepository>();
+            services.AddScoped<IVehicleRepository, VehicleRepository>();
 
             return services;
         }

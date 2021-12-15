@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\VTS.Backend.Core.Application\VTS.Backend.Core.Application.csproj" />
     <ProjectReference Include="..\VTS.Backend.Infrastructure.Persistence\VTS.Backend.Infrastructure.Persistence.csproj" />
   </ItemGroup>
 
