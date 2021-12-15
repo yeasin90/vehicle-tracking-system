@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using VTS.Backend.Infrastructure.Persistence;
 
 namespace VTS.Backend.Api
@@ -20,6 +21,11 @@ namespace VTS.Backend.Api
             services.AddPersistenceServiceRegistration(Configuration);
 
             services.AddControllers();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Vehicle tracking system API", Version = "v1" });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -30,6 +36,12 @@ namespace VTS.Backend.Api
             }
 
             app.UseRouting();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Vehicle tracking system API");
+            });
 
             app.UseEndpoints(endpoints =>
             {
