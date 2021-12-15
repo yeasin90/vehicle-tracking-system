@@ -15,7 +15,7 @@ namespace VTS.Backend.Infrastructure.Persistence.Configurations
                 .IsUnique();
 
             builder.Property(e => e.CreatedDate)
-                   .HasDefaultValueSql("getutcdate()");
+                   .HasDefaultValueSql("(DATETIME('now'))");
         }
     }
 }

@@ -25,7 +25,7 @@ namespace VTS.Backend.Infrastructure.Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasDefaultValueSql("getutcdate()");
+                        .HasDefaultValueSql("(DATETIME('now'))");
 
                     b.Property<string>("SerialNumber")
                         .IsRequired()

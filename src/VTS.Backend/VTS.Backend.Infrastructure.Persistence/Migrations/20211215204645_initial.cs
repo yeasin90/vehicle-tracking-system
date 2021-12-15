@@ -13,7 +13,7 @@ namespace VTS.Backend.Infrastructure.Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     SerialNumber = table.Column<string>(type: "TEXT", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "getutcdate()")
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "(DATETIME('now'))")
                 },
                 constraints: table =>
                 {

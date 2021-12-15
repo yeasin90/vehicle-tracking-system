@@ -9,7 +9,7 @@ using VTS.Backend.Infrastructure.Persistence;
 namespace VTS.Backend.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(VtsDbContext))]
-    [Migration("20211215193324_initial")]
+    [Migration("20211215204645_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,7 +27,7 @@ namespace VTS.Backend.Infrastructure.Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasDefaultValueSql("getutcdate()");
+                        .HasDefaultValueSql("(DATETIME('now'))");
 
                     b.Property<string>("SerialNumber")
                         .IsRequired()
