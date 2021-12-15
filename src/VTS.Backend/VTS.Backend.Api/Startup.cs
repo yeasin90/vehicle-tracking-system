@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using VTS.Backend.Core.Application;
 
 namespace VTS.Backend.Api
 {
@@ -16,6 +17,8 @@ namespace VTS.Backend.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddApplicationServices(Configuration);
+
             services.AddControllers();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
