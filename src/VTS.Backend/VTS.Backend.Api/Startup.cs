@@ -22,6 +22,8 @@ namespace VTS.Backend.Api
 
             services.AddControllers();
 
+            services.AddRouting(options => options.LowercaseUrls = true);
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Vehicle tracking system API", Version = "v1" });

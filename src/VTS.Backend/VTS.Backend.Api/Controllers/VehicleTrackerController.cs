@@ -7,8 +7,15 @@ namespace VTS.Backend.Api.Controllers
     public class VehicleTrackerController : ControllerBase
     {
         [HttpPost]
-        [Route("register")]
+        [Route("device")]
         public async Task<ActionResult> RegisterDeviceAsync()
+        {
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("device/position")]
+        public async Task<ActionResult> RegisterDevicePositionAsync()
         {
             return Ok();
         }
