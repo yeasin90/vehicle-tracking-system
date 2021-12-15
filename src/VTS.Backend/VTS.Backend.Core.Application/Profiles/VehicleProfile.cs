@@ -9,6 +9,7 @@ namespace VTS.Backend.Core.Application.Profiles
         public VehicleProfile()
         {
             CreateMap<Vehicle, RegisterVehicleDto>().ReverseMap();
+            CreateMap<Vehicle, RegisterVehicleCommand>().ReverseMap();
         }  
     }
 }
