@@ -8,4 +8,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.13" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\VTS.Backend.Core.Domain\VTS.Backend.Core.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -17,8 +17,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VTS.Backend.Core.Domain", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VTS.Backend.Api", "VTS.Backend\VTS.Backend.Api\VTS.Backend.Api.csproj", "{1D7FA5D7-ACAD-4EF3-B9DF-D454EE235EA3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VTS.Backend.Core.Application", "VTS.Backend\VTS.Backend.Core.Application\VTS.Backend.Core.Application.csproj", "{AD24FE72-EA1B-4E13-A9CD-C5F13B9F42EF}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,10 +35,6 @@ Global
 		{1D7FA5D7-ACAD-4EF3-B9DF-D454EE235EA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D7FA5D7-ACAD-4EF3-B9DF-D454EE235EA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D7FA5D7-ACAD-4EF3-B9DF-D454EE235EA3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AD24FE72-EA1B-4E13-A9CD-C5F13B9F42EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AD24FE72-EA1B-4E13-A9CD-C5F13B9F42EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AD24FE72-EA1B-4E13-A9CD-C5F13B9F42EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AD24FE72-EA1B-4E13-A9CD-C5F13B9F42EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,7 +46,6 @@ Global
 		{EE2681C5-F691-4ECA-AE35-B59A6BCAA18A} = {2D494ADD-2442-43E7-B1DA-851FABE90535}
 		{3572C554-6EB5-4535-8198-57C5C4A15605} = {50D26CB0-7360-47E5-B815-5B8C6CC0CF2A}
 		{1D7FA5D7-ACAD-4EF3-B9DF-D454EE235EA3} = {855782F2-372A-44F8-ABBF-561DB2B4CDB6}
-		{AD24FE72-EA1B-4E13-A9CD-C5F13B9F42EF} = {50D26CB0-7360-47E5-B815-5B8C6CC0CF2A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E48F6D50-94C6-433B-961F-2B7591F0EF52}
