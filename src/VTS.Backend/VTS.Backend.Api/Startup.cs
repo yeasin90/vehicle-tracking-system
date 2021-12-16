@@ -25,10 +25,14 @@ namespace VTS.Backend.Api
             services.AddApplicationServices();
 
             services.AddControllers()
+                // To fix reference looping issues on api response
                     .AddNewtonsoftJson(options =>
                         options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
-            services.AddRouting(options => options.LowercaseUrls = true);
+            services.AddRouting(options =>
+            {
+                options.LowercaseUrls = true;
+            });
 
             services.AddSwaggerGen(c =>
             {

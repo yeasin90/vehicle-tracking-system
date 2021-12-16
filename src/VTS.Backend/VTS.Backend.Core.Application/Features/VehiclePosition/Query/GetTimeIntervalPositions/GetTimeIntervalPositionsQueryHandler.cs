@@ -4,35 +4,37 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Linq;
 using VTS.Backend.Core.Application.Contracts;
 using VTS.Backend.Core.Application.Exceptions;
 using VTS.Backend.Core.Application.Features.VehiclePosition.Command.RegisterPosition;
 
-namespace VTS.Backend.Core.Application.Features.VehiclePosition.Query.GetCurrentPosition
+namespace VTS.Backend.Core.Application.Features.VehiclePosition.Query.GetTimeIntervalPositions
 {
-    public class GetCurrentPositionQueryHandler : IRequestHandler<GetCurrentPositionQuery, VehiclePositionDto>
+    public class GetTimeIntervalPositionsQueryHandler : IRequestHandler<GetTimeIntervalPositionsQuery, IEnumerable<VehiclePositionDto>>
     {
         private readonly IMapper _mapper;
         private readonly IVehiclePositionRepository _vehiclePositionRepository;
 
-        public GetCurrentPositionQueryHandler(IMapper mapper, IVehiclePositionRepository vehiclePositionRepository)
+        public GetTimeIntervalPositionsQueryHandler(IMapper mapper, IVehiclePositionRepository vehiclePositionRepository)
         {
             _mapper = mapper;
             _vehiclePositionRepository = vehiclePositionRepository;
         }
 
-        public async Task<VehiclePositionDto> Handle(GetCurrentPositionQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<VehiclePositionDto>> Handle(GetTimeIntervalPositionsQuery request, CancellationToken cancellationToken)
         {
             if (request.VehicleId == Guid.Empty)
                 throw new AppException($"Invalid input");
 
             var item = await _vehiclePositionRepository.GetLatestPositionAsync(request.VehicleId);
 
-            if(item == null)
+            if (item == null)
                 throw new KeyNotFoundException($"Cannot find any vehicle with id:{ request.VehicleId }");
 
-            var result = _mapper.Map<VehiclePositionDto>(item);
-            return result;
+            var entities = await _vehiclePositionRepository.GetPositionsAsync(request.VehicleId, request.FromTimeStampInSeconds, request.ToTimeStampInSeconds);
+            var results = _mapper.Map<IEnumerable<VehiclePositionDto>>(entities);
+            return results;
         }
     }
 }
