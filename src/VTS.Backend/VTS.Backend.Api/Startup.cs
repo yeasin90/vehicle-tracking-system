@@ -24,7 +24,9 @@ namespace VTS.Backend.Api
 
             services.AddApplicationServices();
 
-            services.AddControllers();
+            services.AddControllers()
+                    .AddNewtonsoftJson(options =>
+                        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddRouting(options => options.LowercaseUrls = true);
 

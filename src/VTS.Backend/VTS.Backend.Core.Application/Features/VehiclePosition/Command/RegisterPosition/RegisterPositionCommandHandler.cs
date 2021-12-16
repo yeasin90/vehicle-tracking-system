@@ -40,11 +40,12 @@ namespace VTS.Backend.Core.Application.Features.VehiclePosition.Command.Register
                 Latitude = request.Latitude,
                 Longitude = request.Longitude,
                 CreatedDateTimeStampInSeconds = DateTime.UtcNow.ToUnixTimeStampInSeconds(),
-                Vehilce = existingVehicle
+                VehilceId = request.VehicleId
             };
 
             var savedEntity = await _vehiclePositionRepository.AddAsync(entity);
-            return _mapper.Map<VehiclePositionDto>(savedEntity);
+            var result = _mapper.Map<VehiclePositionDto>(savedEntity);
+            return result;
         }
     }
 }

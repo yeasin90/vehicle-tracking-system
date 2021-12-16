@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net;
-using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 using VTS.Backend.Core.Application.Exceptions;
 
@@ -45,7 +44,7 @@ namespace VTS.Backend.Core.Application.Middleware
                         break;
                 }
 
-                var result = JsonSerializer.Serialize(new { message = error?.Message });
+                var result = JsonConvert.SerializeObject(new { message = error?.Message });
                 await response.WriteAsync(result);
             }
         }

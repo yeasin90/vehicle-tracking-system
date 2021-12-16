@@ -18,6 +18,7 @@ namespace VTS.Backend.Infrastructure.Persistence.Repositories
             var result = await _dbContext.VehiclePositions
                 .OrderByDescending(x => x.CreatedDateTimeStampInSeconds)
                 .Where(x => x.VehilceId == vehicleId)
+                .Include(x => x.Vehilce)
                 .FirstOrDefaultAsync();
             return result;
         }

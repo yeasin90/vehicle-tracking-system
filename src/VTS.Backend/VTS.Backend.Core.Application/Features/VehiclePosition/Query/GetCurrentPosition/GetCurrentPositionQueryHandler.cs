@@ -31,7 +31,8 @@ namespace VTS.Backend.Core.Application.Features.VehiclePosition.Query.GetCurrent
             if(item == null)
                 throw new KeyNotFoundException($"Cannot find any vehicle with id:{ request.VehicleId }");
 
-            return _mapper.Map<VehiclePositionDto>(item);
+            var result = _mapper.Map<VehiclePositionDto>(item);
+            return result;
         }
     }
 }
