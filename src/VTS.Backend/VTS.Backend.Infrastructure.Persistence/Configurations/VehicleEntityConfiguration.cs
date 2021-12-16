@@ -13,9 +13,6 @@ namespace VTS.Backend.Infrastructure.Persistence.Configurations
 
             builder.HasIndex(e => new { e.Id, e.SerialNumber })
                 .IsUnique();
-
-            builder.Property(e => e.CreatedDate)
-                   .HasDefaultValueSql("(DATETIME('now'))");
         }
     }
 }

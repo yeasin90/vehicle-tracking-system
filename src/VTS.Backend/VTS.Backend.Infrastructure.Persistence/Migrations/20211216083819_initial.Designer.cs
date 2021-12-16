@@ -9,7 +9,7 @@ using VTS.Backend.Infrastructure.Persistence;
 namespace VTS.Backend.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(VtsDbContext))]
-    [Migration("20211216025256_initial")]
+    [Migration("20211216083819_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,10 +24,8 @@ namespace VTS.Backend.Infrastructure.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT")
-                        .HasDefaultValueSql("(DATETIME('now'))");
+                    b.Property<double>("CreatedDateTimeStampInSeconds")
+                        .HasColumnType("REAL");
 
                     b.Property<string>("SerialNumber")
                         .IsRequired()
@@ -47,8 +45,8 @@ namespace VTS.Backend.Infrastructure.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("CreatedDateTimeStampInSeconds")
+                        .HasColumnType("REAL");
 
                     b.Property<double>("Latitude")
                         .HasColumnType("REAL");
@@ -60,6 +58,8 @@ namespace VTS.Backend.Infrastructure.Persistence.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedDateTimeStampInSeconds");
 
                     b.HasIndex("VehilceId");
 

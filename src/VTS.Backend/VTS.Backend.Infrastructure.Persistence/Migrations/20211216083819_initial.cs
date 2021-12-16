@@ -13,7 +13,7 @@ namespace VTS.Backend.Infrastructure.Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     SerialNumber = table.Column<string>(type: "TEXT", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "(DATETIME('now'))")
+                    CreatedDateTimeStampInSeconds = table.Column<double>(type: "REAL", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,7 +28,7 @@ namespace VTS.Backend.Infrastructure.Persistence.Migrations
                     Latitude = table.Column<double>(type: "REAL", nullable: false),
                     Longitude = table.Column<double>(type: "REAL", nullable: false),
                     VehilceId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    CreatedDateTimeStampInSeconds = table.Column<double>(type: "REAL", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -40,6 +40,11 @@ namespace VTS.Backend.Infrastructure.Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VehiclePositions_CreatedDateTimeStampInSeconds",
+                table: "VehiclePositions",
+                column: "CreatedDateTimeStampInSeconds");
 
             migrationBuilder.CreateIndex(
                 name: "IX_VehiclePositions_VehilceId",

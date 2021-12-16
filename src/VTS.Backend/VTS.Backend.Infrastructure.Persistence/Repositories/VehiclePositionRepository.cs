@@ -16,7 +16,7 @@ namespace VTS.Backend.Infrastructure.Persistence.Repositories
         public async Task<VehiclePosition> GetLatestPosition(Guid vehicleId)
         {
             var result = await _dbContext.VehiclePositions
-                .OrderByDescending(x => x.CreatedDate)
+                .OrderByDescending(x => x.CreatedDateTimeStampInSeconds)
                 .Where(x => x.VehilceId == vehicleId)
                 .FirstOrDefaultAsync();
             return result;

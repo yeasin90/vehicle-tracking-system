@@ -13,6 +13,8 @@ namespace VTS.Backend.Infrastructure.Persistence.Configurations
 
             builder.Property(e => e.Longitude)
                    .IsRequired();
+
+            builder.HasIndex(e => e.CreatedDateTimeStampInSeconds);
         }
     }
 }

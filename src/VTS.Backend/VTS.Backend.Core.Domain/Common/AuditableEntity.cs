@@ -7,6 +7,6 @@ namespace VTS.Backend.Core.Domain.Common
     {
         [Key]
         public Guid Id { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public double CreatedDateTimeStampInSeconds { get; set; }
     }
 }
