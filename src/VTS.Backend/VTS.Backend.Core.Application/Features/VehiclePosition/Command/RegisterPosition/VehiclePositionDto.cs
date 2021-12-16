@@ -2,7 +2,7 @@
 using VTS.Backend.Core.Application.Base;
 using VTS.Backend.Core.Application.Features.Vehicle.Command.RegisterVehicle;
 
-namespace VTS.Backend.Core.Application.Features.VehiclePosition.Command.RegisterVehiclePosition
+namespace VTS.Backend.Core.Application.Features.VehiclePosition.Command.RegisterPosition
 {
     public class VehiclePositionDto : BaseDto
     {

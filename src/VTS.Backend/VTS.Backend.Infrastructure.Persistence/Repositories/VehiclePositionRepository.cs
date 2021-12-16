@@ -1,4 +1,8 @@
-﻿using VTS.Backend.Core.Application.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using VTS.Backend.Core.Application.Contracts;
 using VTS.Backend.Core.Domain.Entities;
 
 namespace VTS.Backend.Infrastructure.Persistence.Repositories
@@ -7,6 +11,15 @@ namespace VTS.Backend.Infrastructure.Persistence.Repositories
     {
         public VehiclePositionRepository(VtsDbContext dbContext) : base(dbContext)
         {
+        }
+
+        public async Task<VehiclePosition> GetLatestPosition(Guid vehicleId)
+        {
+            var result = await _dbContext.VehiclePositions
+                .OrderByDescending(x => x.CreatedDate)
+                .Where(x => x.VehilceId == vehicleId)
+                .FirstOrDefaultAsync();
+            return result;
         }
     }
 }

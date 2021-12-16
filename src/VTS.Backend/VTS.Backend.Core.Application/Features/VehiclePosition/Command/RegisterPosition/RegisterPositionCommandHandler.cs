@@ -5,20 +5,20 @@ using System.Threading.Tasks;
 using VTS.Backend.Core.Application.Contracts;
 using VTS.Backend.Core.Application.Exceptions;
 
-namespace VTS.Backend.Core.Application.Features.VehiclePosition.Command.RegisterVehiclePosition
+namespace VTS.Backend.Core.Application.Features.VehiclePosition.Command.RegisterPosition
 {
-    public class RegisterVehiclePositionCommandHandler : IRequestHandler<RegisterVehiclePositionCommand, VehiclePositionDto>
+    public class RegisterPositionCommandHandler : IRequestHandler<RegisterPositionCommand, VehiclePositionDto>
     {
         private readonly IMapper _mapper;
         private readonly IVehiclePositionRepository _vehiclePositionRepository;
 
-        public RegisterVehiclePositionCommandHandler(IMapper mapper, IVehiclePositionRepository vehiclePositionRepository)
+        public RegisterPositionCommandHandler(IMapper mapper, IVehiclePositionRepository vehiclePositionRepository)
         {
             _mapper = mapper;
             _vehiclePositionRepository = vehiclePositionRepository;
         }
 
-        public async Task<VehiclePositionDto> Handle(RegisterVehiclePositionCommand request, CancellationToken cancellationToken)
+        public async Task<VehiclePositionDto> Handle(RegisterPositionCommand request, CancellationToken cancellationToken)
         {
             if (request.Latitude == 0 || request.Longitude == 0)
                 throw new AppException($"{nameof(request.Latitude)} or {nameof(request.Longitude)} cannot be zero");

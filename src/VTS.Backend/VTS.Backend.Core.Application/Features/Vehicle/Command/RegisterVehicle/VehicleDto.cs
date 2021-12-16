@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using VTS.Backend.Core.Application.Base;
-using VTS.Backend.Core.Application.Features.VehiclePosition.Command.RegisterVehiclePosition;
+using VTS.Backend.Core.Application.Features.VehiclePosition.Command.RegisterPosition;
 
 namespace VTS.Backend.Core.Application.Features.Vehicle.Command.RegisterVehicle
 {

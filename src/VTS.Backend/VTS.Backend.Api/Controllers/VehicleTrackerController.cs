@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using VTS.Backend.Core.Application.Features.Vehicle.Command.RegisterVehicle;
-using VTS.Backend.Core.Application.Features.VehiclePosition.Command.RegisterVehiclePosition;
+using VTS.Backend.Core.Application.Features.VehiclePosition.Command.RegisterPosition;
+using VTS.Backend.Core.Application.Features.VehiclePosition.Query.GetCurrentPosition;
 
 namespace VTS.Backend.Api.Controllers
 {
@@ -26,9 +27,17 @@ namespace VTS.Backend.Api.Controllers
 
         [HttpPost]
         [Route("device/position")]
-        public async Task<ActionResult<VehiclePositionDto>> RegisterDevicePositionAsync(RegisterVehiclePositionCommand registerVehiclePosition)
+        public async Task<ActionResult<VehiclePositionDto>> RegisterDevicePositionAsync(RegisterPositionCommand registerVehiclePosition)
         {
             var result = await _mediator.Send(registerVehiclePosition);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("device/position")]
+        public async Task<ActionResult<VehiclePositionDto>> GetCurrentPositionAsync(GetCurrentPositionQuery currentPositionQuery)
+        {
+            var result = await _mediator.Send(currentPositionQuery);
             return Ok(result);
         }
     }
