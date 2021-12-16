@@ -10,10 +10,10 @@ namespace VTS.Backend.Infrastructure.Persistence.Configurations
         {
             builder.Property(e => e.Latitude)
                    .IsRequired();
-
             builder.Property(e => e.Longitude)
                    .IsRequired();
 
+            builder.HasIndex(e => e.VehilceId);
             builder.HasIndex(e => e.CreatedDateTimeStampInSeconds);
         }
     }

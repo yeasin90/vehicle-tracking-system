@@ -6,6 +6,6 @@ namespace VTS.Backend.Core.Application.Features.VehiclePosition.Query.GetCurrent
 {
     public class GetCurrentPositionQuery : IRequest<VehiclePositionDto>
     {
-        public Guid VehicleId { get; set; }
+        public long VehicleId { get; set; }
     }
 }

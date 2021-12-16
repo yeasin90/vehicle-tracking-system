@@ -11,8 +11,8 @@ namespace VTS.Backend.Infrastructure.Persistence.Configurations
             builder.Property(e => e.SerialNumber)
                    .IsRequired();
 
-            builder.HasIndex(e => new { e.Id, e.SerialNumber })
-                .IsUnique();
+            builder.HasIndex(e => e.Id);
+            builder.HasIndex(e => e.SerialNumber);
         }
     }
 }

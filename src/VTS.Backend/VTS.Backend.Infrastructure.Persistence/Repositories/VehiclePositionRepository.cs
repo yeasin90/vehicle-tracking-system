@@ -14,7 +14,7 @@ namespace VTS.Backend.Infrastructure.Persistence.Repositories
         {
         }
 
-        public async Task<VehiclePosition> GetLatestPositionAsync(Guid vehicleId)
+        public async Task<VehiclePosition> GetLatestPositionAsync(long vehicleId)
         {
             var result = await _dbContext.VehiclePositions
                 .OrderByDescending(x => x.CreatedDateTimeStampInSeconds)
@@ -24,7 +24,7 @@ namespace VTS.Backend.Infrastructure.Persistence.Repositories
             return result;
         }
 
-        public async Task<IEnumerable<VehiclePosition>> GetPositionsAsync(Guid vehicleId, double fromTimeStampInSeconds, double toTimeStampInSeconds)
+        public async Task<IEnumerable<VehiclePosition>> GetPositionsAsync(long vehicleId, double fromTimeStampInSeconds, double toTimeStampInSeconds)
         {
             var result = await _dbContext.VehiclePositions
                 .Where(x => x.VehilceId == vehicleId 

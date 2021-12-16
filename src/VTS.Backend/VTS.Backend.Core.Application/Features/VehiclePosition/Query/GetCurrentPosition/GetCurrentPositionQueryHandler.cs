@@ -23,9 +23,6 @@ namespace VTS.Backend.Core.Application.Features.VehiclePosition.Query.GetCurrent
 
         public async Task<VehiclePositionDto> Handle(GetCurrentPositionQuery request, CancellationToken cancellationToken)
         {
-            if (request.VehicleId == Guid.Empty)
-                throw new AppException($"Invalid input");
-
             var item = await _vehiclePositionRepository.GetLatestPositionAsync(request.VehicleId);
 
             if(item == null)

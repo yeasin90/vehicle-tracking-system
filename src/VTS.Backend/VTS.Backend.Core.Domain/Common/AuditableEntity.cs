@@ -6,7 +6,7 @@ namespace VTS.Backend.Core.Domain.Common
     public class AuditableEntity
     {
         [Key]
-        public Guid Id { get; set; }
+        public long Id { get; set; }
         public double CreatedDateTimeStampInSeconds { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace VTS.Backend.Infrastructure.Persistence.Migrations
 {
@@ -11,7 +10,8 @@ namespace VTS.Backend.Infrastructure.Persistence.Migrations
                 name: "Vehicles",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Id = table.Column<long>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     SerialNumber = table.Column<string>(type: "TEXT", nullable: false),
                     CreatedDateTimeStampInSeconds = table.Column<double>(type: "REAL", nullable: false)
                 },
@@ -24,10 +24,11 @@ namespace VTS.Backend.Infrastructure.Persistence.Migrations
                 name: "VehiclePositions",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Id = table.Column<long>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     Latitude = table.Column<double>(type: "REAL", nullable: false),
                     Longitude = table.Column<double>(type: "REAL", nullable: false),
-                    VehilceId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    VehilceId = table.Column<long>(type: "INTEGER", nullable: false),
                     CreatedDateTimeStampInSeconds = table.Column<double>(type: "REAL", nullable: false)
                 },
                 constraints: table =>
@@ -52,10 +53,14 @@ namespace VTS.Backend.Infrastructure.Persistence.Migrations
                 column: "VehilceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vehicles_Id_SerialNumber",
+                name: "IX_Vehicles_Id",
                 table: "Vehicles",
-                columns: new[] { "Id", "SerialNumber" },
-                unique: true);
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vehicles_SerialNumber",
+                table: "Vehicles",
+                column: "SerialNumber");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

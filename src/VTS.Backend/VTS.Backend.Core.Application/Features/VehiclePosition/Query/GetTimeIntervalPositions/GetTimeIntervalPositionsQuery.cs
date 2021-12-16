@@ -7,7 +7,7 @@ namespace VTS.Backend.Core.Application.Features.VehiclePosition.Query.GetTimeInt
 {
     public class GetTimeIntervalPositionsQuery : IRequest<IEnumerable<VehiclePositionDto>>
     {
-        public Guid VehicleId { get; set; }
+        public long VehicleId { get; set; }
         public double FromTimeStampInSeconds { get; set; }
         public double ToTimeStampInSeconds { get; set; }
     }

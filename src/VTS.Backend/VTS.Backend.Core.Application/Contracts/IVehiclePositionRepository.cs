@@ -7,7 +7,7 @@ namespace VTS.Backend.Core.Application.Contracts
 {
     public interface IVehiclePositionRepository : IAsyncRepository<VehiclePosition>
     {
-        Task<VehiclePosition> GetLatestPositionAsync(Guid vehicleId);
-        Task<IEnumerable<VehiclePosition>> GetPositionsAsync(Guid vehicleId, double fromTimeStampInSeconds, double toTimeStampInSeconds);
+        Task<VehiclePosition> GetLatestPositionAsync(long vehicleId);
+        Task<IEnumerable<VehiclePosition>> GetPositionsAsync(long vehicleId, double fromTimeStampInSeconds, double toTimeStampInSeconds);
     }
 }

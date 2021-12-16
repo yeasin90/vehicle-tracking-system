@@ -17,7 +17,7 @@ namespace VTS.Backend.Infrastructure.Persistence.Repositories
             _dbContext = dbContext;
         }
 
-        public virtual async Task<T> GetByIdAsync(Guid id)
+        public virtual async Task<T> GetByIdAsync(long id)
         {
             return await _dbContext.Set<T>().FindAsync(id);
         }
