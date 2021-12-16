@@ -29,7 +29,7 @@ namespace VTS.Backend.Core.Application.Features.VehiclePosition.Query.GetCurrent
             var item = await _vehiclePositionRepository.GetLatestPosition(request.VehicleId);
 
             if(item == null)
-                throw new KeyNotFoundException($"Invalid input");
+                throw new KeyNotFoundException($"No records found with vehicle id:{request.VehicleId}");
 
             return _mapper.Map<VehiclePositionDto>(item);
         }
