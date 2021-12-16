@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using VTS.Backend.Core.Application.Contracts;
 using VTS.Backend.Core.Application.Exceptions;
+using VTS.Backend.Core.Application.Extensions;
 
 namespace VTS.Backend.Core.Application.Features.Vehicle.Command.RegisterVehicle
 {
@@ -23,7 +25,12 @@ namespace VTS.Backend.Core.Application.Features.Vehicle.Command.RegisterVehicle
             if (string.IsNullOrWhiteSpace(request.SerialNumber))
                 throw new AppException($"{nameof(request.SerialNumber)} cannot be empty");
 
-            var entity = _mapper.Map<Domain.Entities.Vehicle>(request);
+            var entity = new Domain.Entities.Vehicle()
+            {
+                SerialNumber = request.SerialNumber,
+                CreatedDateTimeStampInSeconds = DateTime.UtcNow.ToUnixTimeStampInSeconds()
+            };
+
             var savedEntity = await _vehicleRepository.AddAsync(entity);
             return _mapper.Map<VehicleDto>(savedEntity);
         }
