@@ -1,4 +1,5 @@
-﻿using VTS.Backend.Core.Domain.Common;
+﻿using System;
+using VTS.Backend.Core.Domain.Common;
 
 namespace VTS.Backend.Core.Domain.Entities
 {
@@ -6,6 +7,7 @@ namespace VTS.Backend.Core.Domain.Entities
     {
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        public Guid VehilceId { get; set; }
         public Vehicle Vehilce { get; set; }
     }
 }

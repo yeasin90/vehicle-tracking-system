@@ -9,7 +9,7 @@ using VTS.Backend.Infrastructure.Persistence;
 namespace VTS.Backend.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(VtsDbContext))]
-    [Migration("20211215204645_initial")]
+    [Migration("20211216025256_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,7 +56,7 @@ namespace VTS.Backend.Infrastructure.Persistence.Migrations
                     b.Property<double>("Longitude")
                         .HasColumnType("REAL");
 
-                    b.Property<Guid?>("VehilceId")
+                    b.Property<Guid>("VehilceId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -70,7 +70,9 @@ namespace VTS.Backend.Infrastructure.Persistence.Migrations
                 {
                     b.HasOne("VTS.Backend.Core.Domain.Entities.Vehicle", "Vehilce")
                         .WithMany("Positions")
-                        .HasForeignKey("VehilceId");
+                        .HasForeignKey("VehilceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Vehilce");
                 });

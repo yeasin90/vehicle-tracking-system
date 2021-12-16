@@ -54,7 +54,7 @@ namespace VTS.Backend.Infrastructure.Persistence.Migrations
                     b.Property<double>("Longitude")
                         .HasColumnType("REAL");
 
-                    b.Property<Guid?>("VehilceId")
+                    b.Property<Guid>("VehilceId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -68,7 +68,9 @@ namespace VTS.Backend.Infrastructure.Persistence.Migrations
                 {
                     b.HasOne("VTS.Backend.Core.Domain.Entities.Vehicle", "Vehilce")
                         .WithMany("Positions")
-                        .HasForeignKey("VehilceId");
+                        .HasForeignKey("VehilceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Vehilce");
                 });

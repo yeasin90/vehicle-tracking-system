@@ -27,7 +27,7 @@ namespace VTS.Backend.Infrastructure.Persistence.Migrations
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Latitude = table.Column<double>(type: "REAL", nullable: false),
                     Longitude = table.Column<double>(type: "REAL", nullable: false),
-                    VehilceId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    VehilceId = table.Column<Guid>(type: "TEXT", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -38,7 +38,7 @@ namespace VTS.Backend.Infrastructure.Persistence.Migrations
                         column: x => x.VehilceId,
                         principalTable: "Vehicles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

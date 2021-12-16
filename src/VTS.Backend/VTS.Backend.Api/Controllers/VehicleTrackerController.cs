@@ -18,7 +18,7 @@ namespace VTS.Backend.Api.Controllers
 
         [HttpPost]
         [Route("device")]
-        public async Task<ActionResult<RegisterVehicleDto>> RegisterDeviceAsync(RegisterVehicleCommand registerVehicle)
+        public async Task<ActionResult<VehicleDto>> RegisterDeviceAsync(RegisterVehicleCommand registerVehicle)
         {
             var result = await _mediator.Send(registerVehicle);
             return Ok(result);
@@ -26,9 +26,9 @@ namespace VTS.Backend.Api.Controllers
 
         [HttpPost]
         [Route("device/position")]
-        public async Task<ActionResult<RegisterVehiclePositionDto>> RegisterDevicePositionAsync(double latitude, double longitude)
+        public async Task<ActionResult<VehiclePositionDto>> RegisterDevicePositionAsync(RegisterVehiclePositionCommand registerVehiclePosition)
         {
-            var result = await _mediator.Send(new RegisterVehiclePositionCommand() { Latitude = latitude, Longitude = longitude });
+            var result = await _mediator.Send(registerVehiclePosition);
             return Ok(result);
         }
     }

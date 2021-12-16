@@ -6,7 +6,7 @@ using VTS.Backend.Core.Application.Contracts;
 
 namespace VTS.Backend.Core.Application.Features.VehiclePosition.Command.RegisterVehiclePosition
 {
-    public class RegisterVehiclePositionCommandHandler : IRequestHandler<RegisterVehiclePositionCommand, RegisterVehiclePositionDto>
+    public class RegisterVehiclePositionCommandHandler : IRequestHandler<RegisterVehiclePositionCommand, VehiclePositionDto>
     {
         private readonly IMapper _mapper;
         private readonly IVehiclePositionRepository _vehiclePositionRepository;
@@ -17,11 +17,11 @@ namespace VTS.Backend.Core.Application.Features.VehiclePosition.Command.Register
             _vehiclePositionRepository = vehiclePositionRepository;
         }
 
-        public async Task<RegisterVehiclePositionDto> Handle(RegisterVehiclePositionCommand request, CancellationToken cancellationToken)
+        public async Task<VehiclePositionDto> Handle(RegisterVehiclePositionCommand request, CancellationToken cancellationToken)
         {
             var entity = _mapper.Map<Domain.Entities.VehiclePosition>(request);
             var savedEntity = await _vehiclePositionRepository.AddAsync(entity);
-            return _mapper.Map<RegisterVehiclePositionDto>(savedEntity);
+            return _mapper.Map<VehiclePositionDto>(savedEntity);
         }
     }
 }
