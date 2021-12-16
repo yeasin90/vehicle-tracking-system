@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using VTS.Backend.Core.Application;
+using VTS.Backend.Core.Application.Middleware;
 using VTS.Backend.Infrastructure.Persistence;
 
 namespace VTS.Backend.Api
@@ -48,6 +49,9 @@ namespace VTS.Backend.Api
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Vehicle tracking system API");
                 c.RoutePrefix = string.Empty;
             });
+
+            // global error handler
+            app.UseMiddleware<ErrorHandlerMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
