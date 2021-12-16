@@ -52,27 +52,27 @@ namespace VTS.Backend.Infrastructure.Persistence.Migrations
                     b.Property<double>("Longitude")
                         .HasColumnType("REAL");
 
-                    b.Property<long>("VehilceId")
+                    b.Property<long>("VehicleId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedDateTimeStampInSeconds");
 
-                    b.HasIndex("VehilceId");
+                    b.HasIndex("VehicleId");
 
                     b.ToTable("VehiclePositions");
                 });
 
             modelBuilder.Entity("VTS.Backend.Core.Domain.Entities.VehiclePosition", b =>
                 {
-                    b.HasOne("VTS.Backend.Core.Domain.Entities.Vehicle", "Vehilce")
+                    b.HasOne("VTS.Backend.Core.Domain.Entities.Vehicle", "Vehicle")
                         .WithMany("Positions")
-                        .HasForeignKey("VehilceId")
+                        .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Vehilce");
+                    b.Navigation("Vehicle");
                 });
 
             modelBuilder.Entity("VTS.Backend.Core.Domain.Entities.Vehicle", b =>

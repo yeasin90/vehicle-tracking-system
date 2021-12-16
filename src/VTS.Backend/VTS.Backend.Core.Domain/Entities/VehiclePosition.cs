@@ -7,7 +7,7 @@ namespace VTS.Backend.Core.Domain.Entities
     {
         public double Latitude { get; set; }
         public double Longitude { get; set; }
-        public long VehilceId { get; set; }
-        public Vehicle Vehilce { get; set; }
+        public long VehicleId { get; set; }
+        public Vehicle Vehicle { get; set; }
     }
 }

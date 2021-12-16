@@ -40,7 +40,7 @@ namespace VTS.Backend.Core.Application.Features.VehiclePosition.Command.Register
                 Latitude = request.Latitude,
                 Longitude = request.Longitude,
                 CreatedDateTimeStampInSeconds = DateTime.UtcNow.ToUnixTimeStampInSeconds(),
-                VehilceId = request.VehicleId
+                VehicleId = request.VehicleId
             };
 
             var savedEntity = await _vehiclePositionRepository.AddAsync(entity);

@@ -28,15 +28,15 @@ namespace VTS.Backend.Infrastructure.Persistence.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Latitude = table.Column<double>(type: "REAL", nullable: false),
                     Longitude = table.Column<double>(type: "REAL", nullable: false),
-                    VehilceId = table.Column<long>(type: "INTEGER", nullable: false),
+                    VehicleId = table.Column<long>(type: "INTEGER", nullable: false),
                     CreatedDateTimeStampInSeconds = table.Column<double>(type: "REAL", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_VehiclePositions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_VehiclePositions_Vehicles_VehilceId",
-                        column: x => x.VehilceId,
+                        name: "FK_VehiclePositions_Vehicles_VehicleId",
+                        column: x => x.VehicleId,
                         principalTable: "Vehicles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -48,9 +48,9 @@ namespace VTS.Backend.Infrastructure.Persistence.Migrations
                 column: "CreatedDateTimeStampInSeconds");
 
             migrationBuilder.CreateIndex(
-                name: "IX_VehiclePositions_VehilceId",
+                name: "IX_VehiclePositions_VehicleId",
                 table: "VehiclePositions",
-                column: "VehilceId");
+                column: "VehicleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vehicles_Id",
