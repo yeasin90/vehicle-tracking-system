@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VTS.Backend.Api</name>
+    </assembly>
+    <members>
+        <member name="M:VTS.Backend.Api.Controllers.VehicleTrackerController.RegisterDeviceAsync(VTS.Backend.Core.Application.Features.Vehicle.Command.RegisterVehicle.RegisterVehicleCommand)">
+            <summary>
+             Register a vehicle
+            </summary>
+            <returns>Vehicle object created in database</returns>
+        </member>
+        <member name="M:VTS.Backend.Api.Controllers.VehicleTrackerController.RegisterDevicePositionAsync(VTS.Backend.Core.Application.Features.VehiclePosition.Command.RegisterPosition.RegisterPositionCommand)">
+            <summary>
+            Record the position of a registered vehicle
+            </summary>
+            <returns>Vehicle position object created in database</returns>
+        </member>
+        <member name="M:VTS.Backend.Api.Controllers.VehicleTrackerController.GetCurrentPositionAsync(VTS.Backend.Core.Application.Features.VehiclePosition.Query.GetCurrentPosition.GetCurrentPositionQuery)">
+            <summary>
+            Retrieve the current position of a vehicle
+            </summary>
+            <remarks>
+            Retrieves last recorded position in database for a registered vehicle
+            </remarks>
+            <param name="VehicleId">Id of a registered vehicle</param>
+            <returns>Vehicle position object</returns>
+        </member>
+        <member name="M:VTS.Backend.Api.Controllers.VehicleTrackerController.GetPositionsAsync(VTS.Backend.Core.Application.Features.VehiclePosition.Query.GetTimeIntervalPositions.GetTimeIntervalPositionsQuery)">
+            <summary>
+            Retrieve the positions of a vehicle
+            </summary>
+            <remarks>
+            Retrieve the positions of a vehicle during a certain time, in order to display their journey on a map (maps drawing is out of scope)
+            </remarks>
+            <param name="VehicleId">Id of a registered vehicle</param>
+            <param name="FromTimeStampInSeconds">From: time stamp in seconds</param>
+            <param name="ToTimeStampInSeconds">To: time stamp in seconds</param>
+            <returns>List of Vehicle position object</returns>
+        </member>
+    </members>
+</doc>
