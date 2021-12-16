@@ -46,6 +46,7 @@ namespace VTS.Backend.Api
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Vehicle tracking system API");
+                c.RoutePrefix = string.Empty;
             });
 
             app.UseEndpoints(endpoints =>

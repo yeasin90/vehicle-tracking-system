@@ -4,6 +4,7 @@ namespace VTS.Backend.Core.Application.Features.VehiclePosition.Command.Register
 {
     public class  RegisterVehiclePositionCommand : IRequest<RegisterVehiclePositionDto>
     {
-
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
     }
 }
