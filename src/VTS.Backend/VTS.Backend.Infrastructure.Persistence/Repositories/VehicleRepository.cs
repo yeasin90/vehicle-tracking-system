@@ -1,4 +1,7 @@
-﻿using VTS.Backend.Core.Application.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
+using VTS.Backend.Core.Application.Contracts;
 using VTS.Backend.Core.Domain.Entities;
 
 namespace VTS.Backend.Infrastructure.Persistence.Repositories
@@ -7,6 +10,12 @@ namespace VTS.Backend.Infrastructure.Persistence.Repositories
     {
         public VehicleRepository(VtsDbContext dbContext) : base(dbContext)
         {
+        }
+
+        public async Task<Vehicle> GetBySerialNumberAsync(string serialNumber)
+        {
+            var result = await _dbContext.Vehicles.Where(x => x.SerialNumber == serialNumber).FirstOrDefaultAsync();
+            return result;
         }
     }
 }

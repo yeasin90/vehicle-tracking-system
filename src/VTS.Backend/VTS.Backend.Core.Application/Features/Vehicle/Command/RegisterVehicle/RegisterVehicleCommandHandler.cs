@@ -24,6 +24,8 @@ namespace VTS.Backend.Core.Application.Features.Vehicle.Command.RegisterVehicle
         {
             if (string.IsNullOrWhiteSpace(request.SerialNumber))
                 throw new AppException($"{nameof(request.SerialNumber)} cannot be empty");
+            if (await _vehicleRepository.GetBySerialNumberAsync(request.SerialNumber) != null)
+                throw new AppException($"A vehicle with same serial:{request.SerialNumber} already exist");
 
             var entity = new Domain.Entities.Vehicle()
             {
