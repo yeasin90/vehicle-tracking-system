@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using VTS.Backend.Core.Application.Contracts;
@@ -29,10 +30,10 @@ namespace VTS.Backend.Core.Application.Features.VehiclePosition.Command.Register
             if (request.Latitude == 0 || request.Longitude == 0)
                 throw new AppException($"{nameof(request.Latitude)} or {nameof(request.Longitude)} cannot be zero");
 
-            var existingVehicle = await _vehicleRepository.GetByIdAsync(request.VehilceId);
+            var existingVehicle = await _vehicleRepository.GetByIdAsync(request.VehicleId);
 
             if (existingVehicle == null)
-                throw new AppException($"Cannot find any vehilce with id:{request.VehilceId}");
+                throw new KeyNotFoundException($"Cannot find any vehicle with id:{request.VehicleId}");
 
             var entity = new Domain.Entities.VehiclePosition()
             {
