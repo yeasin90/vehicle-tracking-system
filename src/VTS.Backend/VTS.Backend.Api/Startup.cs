@@ -9,6 +9,7 @@ using System.IO;
 using System.Reflection;
 using VTS.Backend.Core.Application;
 using VTS.Backend.Core.Application.Middleware;
+using VTS.Backend.Infrastructure.AuthServer;
 using VTS.Backend.Infrastructure.Persistence;
 
 namespace VTS.Backend.Api
@@ -26,6 +27,8 @@ namespace VTS.Backend.Api
             services.AddPersistenceServiceRegistration(Configuration);
 
             services.AddApplicationServices();
+
+            services.AddPersistenceAuthServerServiceRegistration(Configuration);
 
             services.AddControllers()
                 // To fix reference looping issues on api response
