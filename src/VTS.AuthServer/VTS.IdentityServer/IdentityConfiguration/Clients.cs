@@ -28,7 +28,7 @@ namespace VTS.IdentityServer.IdentityConfiguration
                     AccessTokenType = AccessTokenType.Jwt,
                     AccessTokenLifetime = 1800,
                     // Below, GrantTypes.Code is not used, reason is there is no front-end application
-                    // A jwt token will be requested from IdentityServer using an api end point (AuthorizationController in VTS.Backend.Api project)
+                    // A jwt token will be requested from VTS.Backend.Api to IdentityServer (AuthorizationController in VTS.Backend.Api project)
                     // A Username and password of a registered user in IdentityServer will be supplied
                     // That's why GrantTypes.ResourceOwnerPassword is used
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
