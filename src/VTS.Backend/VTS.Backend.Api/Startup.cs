@@ -16,21 +16,24 @@ namespace VTS.Backend.Api
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
-        public Startup(IConfiguration configuration)
+        private readonly IConfiguration _configuration;
+        private readonly IWebHostEnvironment _env;
+
+        public Startup(IWebHostEnvironment env, IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
+            _env = env;
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddPersistenceServiceRegistration(Configuration);
+            services.AddPersistenceServiceRegistration(_configuration);
 
             services.AddApplicationServices();
 
             services.AddHttpClient<ITokenService, TokenService>();
 
-            services.AddPersistenceAuthServerServiceRegistration(Configuration);           
+            services.AddPersistenceAuthServerServiceRegistration(_configuration, _env);           
 
             services.AddControllers()
                 // To fix reference looping issues on api response
@@ -52,9 +55,9 @@ namespace VTS.Backend.Api
             });
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
+            if (_env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -70,6 +73,9 @@ namespace VTS.Backend.Api
 
             // global error handler
             app.UseMiddleware<ErrorHandlerMiddleware>();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using VTS.Backend.Core.Application.Features.Vehicle.Command.RegisterVehicle;
@@ -8,6 +9,7 @@ using VTS.Backend.Core.Application.Features.VehiclePosition.Query.GetTimeInterva
 
 namespace VTS.Backend.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class VehicleTrackerController : ControllerBase
     {

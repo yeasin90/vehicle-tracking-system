@@ -1,7 +1,9 @@
 ﻿using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using System.Threading.Tasks;
 using VTS.Backend.Infrastructure.AuthServer.Settings;
@@ -10,7 +12,7 @@ namespace VTS.Backend.Infrastructure.AuthServer
 {
     public static class PersistenceAuthServerServiceRegistration
     {
-        public static IServiceCollection AddPersistenceAuthServerServiceRegistration(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddPersistenceAuthServerServiceRegistration(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment env)
         {
             services.Configure<AuthorizationServerSettings>(options => configuration.GetSection("AuthorizationServerSettings").Bind(options));
 
@@ -19,6 +21,12 @@ namespace VTS.Backend.Infrastructure.AuthServer
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(options =>
                     {
+                        if(env.IsDevelopment())
+                        {
+                            // For Development, Https is disabled
+                            options.RequireHttpsMetadata = false;
+                        }
+
                         // base-address of identityserver
                         options.Authority = authServerSettings.Value.Host;
 
@@ -34,29 +42,29 @@ namespace VTS.Backend.Infrastructure.AuthServer
                             ValidAudience = authServerSettings.Value.Audience
                         };
 
-                        options.Events = new JwtBearerEvents()
-                        {
-                            OnAuthenticationFailed = context =>
-                            {
-                                return Task.CompletedTask;
-                            },
-                            OnTokenValidated = context =>
-                            {
-                                return Task.CompletedTask;
-                            },
-                            OnMessageReceived = context =>
-                            {
-                                return Task.CompletedTask;
-                            },
-                            OnChallenge = context =>
-                            {
-                                return Task.CompletedTask;
-                            },
-                            OnForbidden = context =>
-                            {
-                                return Task.CompletedTask;
-                            },
-                        };
+                        //options.Events = new JwtBearerEvents()
+                        //{
+                        //    OnAuthenticationFailed = context =>
+                        //    {
+                        //        return Task.CompletedTask;
+                        //    },
+                        //    OnTokenValidated = context =>
+                        //    {
+                        //        return Task.CompletedTask;
+                        //    },
+                        //    OnMessageReceived = context =>
+                        //    {
+                        //        return Task.CompletedTask;
+                        //    },
+                        //    OnChallenge = context =>
+                        //    {
+                        //        return Task.CompletedTask;
+                        //    },
+                        //    OnForbidden = context =>
+                        //    {
+                        //        return Task.CompletedTask;
+                        //    },
+                        //};
                     });
 
             return services;
