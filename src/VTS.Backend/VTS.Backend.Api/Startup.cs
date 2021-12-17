@@ -28,9 +28,9 @@ namespace VTS.Backend.Api
 
             services.AddApplicationServices();
 
-            services.AddPersistenceAuthServerServiceRegistration(Configuration);
-
             services.AddHttpClient<ITokenService, TokenService>();
+
+            services.AddPersistenceAuthServerServiceRegistration(Configuration);           
 
             services.AddControllers()
                 // To fix reference looping issues on api response

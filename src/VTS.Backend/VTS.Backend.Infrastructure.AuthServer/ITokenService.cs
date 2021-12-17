@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using IdentityModel.Client;
+using System.Threading.Tasks;
 
 namespace VTS.Backend.Infrastructure.AuthServer
 {
     public interface ITokenService
     {
-        Task<string> GetToken();
+        Task<TokenResponse> GetJwtTokenAsync(string username, string password);
     }
 }

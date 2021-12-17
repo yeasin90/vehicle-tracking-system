@@ -4,6 +4,14 @@
         <name>VTS.Backend.Api</name>
     </assembly>
     <members>
+        <member name="M:VTS.Backend.Api.Controllers.AuthorizationController.RegisterDeviceAsync(VTS.Backend.Infrastructure.AuthServer.LoginModel)">
+            <summary>
+             Get JWT token of a user from Identity Server
+            </summary>
+            <returns>Returns JWT token response</returns>
+            <param name="Username">Username of registered user in IdentityServer</param>
+            <param name="Password">Password of registered user in IdentityServer</param>
+        </member>
         <member name="M:VTS.Backend.Api.Controllers.VehicleTrackerController.RegisterDeviceAsync(VTS.Backend.Core.Application.Features.Vehicle.Command.RegisterVehicle.RegisterVehicleCommand)">
             <summary>
              Register a vehicle

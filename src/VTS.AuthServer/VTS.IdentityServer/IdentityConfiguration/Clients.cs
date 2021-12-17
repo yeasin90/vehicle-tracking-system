@@ -12,31 +12,28 @@ namespace VTS.IdentityServer.IdentityConfiguration
             {
                 new Client
                 {
-                    ClientId = "weatherApi",
-                    ClientName = "ASP.NET Core Weather Api",
+                    ClientId = "VTS.Backend.Api",
+                    ClientName = "VTS.Backend.Api",
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    ClientSecrets = new List<Secret> {new Secret("ProCodeGuide".Sha256())},
-                    AllowedScopes = new List<string> {"weatherApi.read"}
+                    ClientSecrets = new List<Secret> {new Secret("VTS.Backend.Api.Secret".Sha256())},
+                    AllowedScopes = new List<string> { "app.api.vts.read", "app.api.vts.write" }
                 },
                 new Client
                 {
-                    ClientId = "oidcMVCApp",
-                    ClientName = "Sample ASP.NET Core MVC Web App",
-                    ClientSecrets = new List<Secret> {new Secret("ProCodeGuide".Sha256())},
-    
-                    AllowedGrantTypes = GrantTypes.Code,
-                    RedirectUris = new List<string> {"https://localhost:5001/signin-oidc"},
+                    ClientId = "VTS.Frontend",
+                    ClientName = "VTS.Frontend",
+                    ClientSecrets = new List<Secret> {new Secret("VTS.Frontend.Secret".Sha256())},
+                    AccessTokenType = AccessTokenType.Jwt,
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Email,
                         "role",
-                        "weatherApi.read"
-                    },
-
-                    RequirePkce = true,
-                    AllowPlainTextPkce = false
+                        "app.api.vts.read",
+                        "app.api.vts.write"
+                    }
                 }
             };
         }

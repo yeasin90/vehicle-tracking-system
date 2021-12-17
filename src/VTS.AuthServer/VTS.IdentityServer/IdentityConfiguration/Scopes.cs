@@ -9,8 +9,8 @@ namespace VTS.IdentityServer.IdentityConfiguration
         {
             return new[]
             {
-                new ApiScope("weatherApi.read", "Read Access to Weather API"),
-                new ApiScope("weatherApi.write", "Write Access to Weather API"),
+                new ApiScope("vtsApi.read", "Read Access to Vehicle Tracking System API"),
+                new ApiScope("vtsApi.write", "Write Access to Vehicle Tracking System API"),
             };
         }
     }

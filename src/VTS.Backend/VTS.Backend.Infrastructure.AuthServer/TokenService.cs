@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
+using static VTS.Backend.Infrastructure.AuthServer.OidcConstants;
 
 namespace VTS.Backend.Infrastructure.AuthServer
 {
@@ -9,27 +10,28 @@ namespace VTS.Backend.Infrastructure.AuthServer
     {
         private readonly DiscoveryDocumentResponse _discoveryDocument;
         private readonly HttpClient _httpClient;
+        private readonly IConfiguration _configuration;
 
-        public TokenService(HttpClient httpClient, IConfiguration Configuration)
+        public TokenService(HttpClient httpClient, IConfiguration configuration)
         {
+            _configuration = configuration;
             _httpClient = httpClient;
             _discoveryDocument = httpClient.GetDiscoveryDocumentAsync(
-                "http://localhost:5000/.well-known/openid-configuration").Result;
+                $"{configuration["AuthenticationServer:Host"]}/{Oidc.DiscoveryConfiguration}").Result;
         }
 
-        public async Task<string> GetToken()
+        public async Task<TokenResponse> GetJwtTokenAsync(string username, string password)
         {
             var tokenResponse = await _httpClient.RequestPasswordTokenAsync(new PasswordTokenRequest()
             {
                 Address = _discoveryDocument.TokenEndpoint,
-                ClientId = "oidcMVCApp",
-                ClientSecret = "ProCodeGuide",
-                UserName = "procoder",
-                Password = "password"
-
+                ClientId = _configuration["AuthenticationServer:ClientId"],
+                ClientSecret = _configuration["AuthenticationServer:ClientSecret"],
+                UserName = username,
+                Password = password
             });
 
-            return tokenResponse.AccessToken;
+            return tokenResponse;
         }
     }
 }
