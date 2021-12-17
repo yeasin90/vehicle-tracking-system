@@ -9,20 +9,31 @@ namespace VTS.IdentityServer
 {
     public class Startup
     {
+        private readonly IWebHostEnvironment _env;
+        public Startup(IWebHostEnvironment env)
+        {
+            _env = env;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddIdentityServer()
+            var identityServiceBuilder = services.AddIdentityServer()
                 .AddInMemoryClients(Clients.Get())
                 .AddInMemoryIdentityResources(Resources.GetIdentityResources())
                 .AddInMemoryApiResources(Resources.GetApiResources())
                 .AddInMemoryApiScopes(Scopes.GetApiScopes())
-                .AddTestUsers(Users.Get())
-                .AddDeveloperSigningCredential();
+                .AddTestUsers(Users.Get());
+
+            // Only for developemnt. Real certificate needs to be used on Production
+            if(_env.IsDevelopment())
+            {
+                identityServiceBuilder.AddDeveloperSigningCredential();
+            }    
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
+            if (_env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }

@@ -19,7 +19,7 @@ namespace VTS.IdentityServer.IdentityConfiguration
                     Password = "user1",
                     Claims = new List<Claim> 
                     {
-                        new Claim(JwtClaimTypes.Role, "user")
+                        new Claim(JwtClaimTypes.Role, "User")
                     }
                 },
                 new TestUser
@@ -29,7 +29,7 @@ namespace VTS.IdentityServer.IdentityConfiguration
                     Password = "user2",
                     Claims = new List<Claim>
                     {
-                        new Claim(JwtClaimTypes.Role, "user")
+                        new Claim(JwtClaimTypes.Role, "User")
                     }
                 },
                 new TestUser
@@ -39,7 +39,7 @@ namespace VTS.IdentityServer.IdentityConfiguration
                     Password = "admin1",
                     Claims = new List<Claim>
                     {
-                        new Claim(JwtClaimTypes.Role, "admin")
+                        new Claim(JwtClaimTypes.Role, "Admin")
                     }
                 }
             };

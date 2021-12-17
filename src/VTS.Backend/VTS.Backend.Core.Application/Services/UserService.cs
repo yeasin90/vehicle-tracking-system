@@ -16,6 +16,9 @@ namespace VTS.Backend.Core.Application.Services
 
         public VtsUser GetCurrentUser()
         {
+            if (_httpContextAccessor.HttpContext.User == null)
+                return null;
+
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var role = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Role).Value;
 

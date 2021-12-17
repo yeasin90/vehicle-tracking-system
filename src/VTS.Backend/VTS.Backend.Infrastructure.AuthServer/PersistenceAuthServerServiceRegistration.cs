@@ -1,11 +1,9 @@
-﻿using IdentityServer4.AccessTokenValidation;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using System.Threading.Tasks;
 using VTS.Backend.Infrastructure.AuthServer.Settings;
 
 namespace VTS.Backend.Infrastructure.AuthServer
@@ -38,8 +36,9 @@ namespace VTS.Backend.Infrastructure.AuthServer
                         {
                             ValidateIssuer = true,
                             ValidateAudience = true,
+                            ValidateLifetime = true,
                             ValidIssuer = authServerSettings.Value.Host,
-                            ValidAudience = authServerSettings.Value.Audience
+                            ValidAudience = authServerSettings.Value.Audience                         
                         };
                     });
 
