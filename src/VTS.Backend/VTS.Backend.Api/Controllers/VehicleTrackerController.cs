@@ -6,7 +6,6 @@ using VTS.Backend.Core.Application.Features.Vehicle.Command.RegisterVehicle;
 using VTS.Backend.Core.Application.Features.VehiclePosition.Command.RegisterPosition;
 using VTS.Backend.Core.Application.Features.VehiclePosition.Query.GetCurrentPosition;
 using VTS.Backend.Core.Application.Features.VehiclePosition.Query.GetTimeIntervalPositions;
-using VTS.Backend.Core.Application.Services;
 
 namespace VTS.Backend.Api.Controllers
 {
@@ -15,12 +14,10 @@ namespace VTS.Backend.Api.Controllers
     public class VehicleTrackerController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IUserService _userService;
 
-        public VehicleTrackerController(IMediator mediator, IUserService userService)
+        public VehicleTrackerController(IMediator mediator)
         {
             _mediator = mediator;
-            _userService = userService;
         }
 
         /// <summary>
@@ -29,10 +26,9 @@ namespace VTS.Backend.Api.Controllers
         /// <remarks>A unique serial number (alphanumeric) must be supplied in request body</remarks>
         /// <returns>Vehicle object created in database</returns>
         [HttpPost]
-        [Route("device")]
-        public async Task<ActionResult<VehicleDto>> RegisterDeviceAsync([FromBody]RegisterVehicleCommand command)
+        [Route("vehicle")]
+        public async Task<ActionResult<VehicleDto>> RegisterVehicleAsync([FromBody]RegisterVehicleCommand command)
         {
-            var user = _userService.GetCurrentUser();
             var result = await _mediator.Send(command);
             return Ok(result);
         }
@@ -46,8 +42,8 @@ namespace VTS.Backend.Api.Controllers
         /// </remarks>
         /// <returns>Vehicle position object created in database</returns>
         [HttpPost]
-        [Route("device/position")]
-        public async Task<ActionResult<VehiclePositionDto>> RegisterDevicePositionAsync([FromBody]RegisterPositionCommand command)
+        [Route("vehicle/position")]
+        public async Task<ActionResult<VehiclePositionDto>> RegisterVehiclePositionAsync([FromBody]RegisterPositionCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);
@@ -62,7 +58,7 @@ namespace VTS.Backend.Api.Controllers
         /// <param name="VehicleId">Id of a registered vehicle</param>
         /// <returns>Vehicle position object</returns>
         [HttpGet]
-        [Route("device/{VehicleId}/position")]
+        [Route("vehicle/{VehicleId}/position")]
         public async Task<ActionResult<VehiclePositionDto>> GetCurrentPositionAsync(GetCurrentPositionQuery query)
         {
             var result = await _mediator.Send(query);
@@ -80,7 +76,7 @@ namespace VTS.Backend.Api.Controllers
         /// <param name="ToTimeStampInSeconds">To: time stamp in seconds</param>
         /// <returns>List of Vehicle position object</returns>
         [HttpGet]
-        [Route("device/{VehicleId}/position/{FromTimeStampInSeconds}/{ToTimeStampInSeconds}")]
+        [Route("vehicle/{VehicleId}/position/{FromTimeStampInSeconds}/{ToTimeStampInSeconds}")]
         public async Task<ActionResult> GetPositionsAsync(GetTimeIntervalPositionsQuery query)
         {
             var result = await _mediator.Send(query);
