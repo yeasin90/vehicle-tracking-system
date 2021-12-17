@@ -30,6 +30,8 @@ namespace VTS.Backend.Api
 
             services.AddPersistenceAuthServerServiceRegistration(Configuration);
 
+            services.AddHttpClient<ITokenService, TokenService>();
+
             services.AddControllers()
                 // To fix reference looping issues on api response
                     .AddNewtonsoftJson(options =>
