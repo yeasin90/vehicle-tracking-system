@@ -23,7 +23,10 @@ namespace VTS.Backend.Api.Controllers
         /// <summary>
         ///  Register a vehicle
         /// </summary>
-        /// <remarks>A unique serial number (alphanumeric) must be supplied in request body</remarks>
+        /// <remarks>A unique serial number (alphanumeric) must be supplied in request body.<br/>
+        /// Every vehicle will be associated with an authenticated user or admin (from IdentityServer).<br/>
+        /// Id of the authenticated user or admin will be retrieved from JWT bearer token.
+        /// </remarks>
         /// <returns>Vehicle object created in database</returns>
         [HttpPost]
         [Route("vehicle")]
@@ -53,10 +56,13 @@ namespace VTS.Backend.Api.Controllers
         /// Retrieve the current position of a vehicle
         /// </summary>
         /// <remarks>
-        /// Retrieves last recorded position in database for a registered vehicle
+        /// Retrieves last recorded position in database for a registered vehicle.<br/>
+        /// Only autheticated Admin can access this endpoint.<br/>
+        /// Admin role will be retrieved from JWT bearer token.
         /// </remarks>
         /// <param name="VehicleId">Id of a registered vehicle</param>
         /// <returns>Vehicle position object</returns>
+        //[Authorize(Roles = $"{VtsUserRole.Admin.ToString()}")]
         [HttpGet]
         [Route("vehicle/{VehicleId}/position")]
         public async Task<ActionResult<VehiclePositionDto>> GetCurrentPositionAsync(GetCurrentPositionQuery query)
@@ -69,12 +75,15 @@ namespace VTS.Backend.Api.Controllers
         /// Retrieve the positions of a vehicle
         /// </summary>
         /// <remarks>
-        /// Retrieve the positions of a vehicle during a certain time, in order to display their journey on a map (maps drawing is out of scope)
+        /// Retrieve the positions of a vehicle during a certain time, in order to display their journey on a map (maps drawing is out of scope).<br/>
+        /// Only Admin can access this endpoint.<br/>
+        /// Admin role will be retrieved from JWT bearer token.
         /// </remarks>
         /// <param name="VehicleId">Id of a registered vehicle</param>
         /// <param name="FromTimeStampInSeconds">From: time stamp in seconds</param>
         /// <param name="ToTimeStampInSeconds">To: time stamp in seconds</param>
         /// <returns>List of Vehicle position object</returns>
+        //[Authorize(Roles = $"{VtsUserRole.Admin.ToString()}")]
         [HttpGet]
         [Route("vehicle/{VehicleId}/position/{FromTimeStampInSeconds}/{ToTimeStampInSeconds}")]
         public async Task<ActionResult> GetPositionsAsync(GetTimeIntervalPositionsQuery query)

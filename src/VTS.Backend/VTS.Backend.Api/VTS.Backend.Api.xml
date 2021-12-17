@@ -18,14 +18,17 @@
             <param name="Username">Username of registered user in IdentityServer</param>
             <param name="Password">Password of registered user in IdentityServer</param>
         </member>
-        <member name="M:VTS.Backend.Api.Controllers.VehicleTrackerController.RegisterDeviceAsync(VTS.Backend.Core.Application.Features.Vehicle.Command.RegisterVehicle.RegisterVehicleCommand)">
+        <member name="M:VTS.Backend.Api.Controllers.VehicleTrackerController.RegisterVehicleAsync(VTS.Backend.Core.Application.Features.Vehicle.Command.RegisterVehicle.RegisterVehicleCommand)">
             <summary>
              Register a vehicle
             </summary>
-            <remarks>A unique serial number (alphanumeric) must be supplied in request body</remarks>
+            <remarks>A unique serial number (alphanumeric) must be supplied in request body.<br/>
+            Every vehicle will be associated with an authenticated user or admin (from IdentityServer).<br/>
+            Id of the authenticated user or admin will be retrieved from JWT bearer token.
+            </remarks>
             <returns>Vehicle object created in database</returns>
         </member>
-        <member name="M:VTS.Backend.Api.Controllers.VehicleTrackerController.RegisterDevicePositionAsync(VTS.Backend.Core.Application.Features.VehiclePosition.Command.RegisterPosition.RegisterPositionCommand)">
+        <member name="M:VTS.Backend.Api.Controllers.VehicleTrackerController.RegisterVehiclePositionAsync(VTS.Backend.Core.Application.Features.VehiclePosition.Command.RegisterPosition.RegisterPositionCommand)">
             <summary>
             Record the position of a registered vehicle
             </summary>
@@ -40,7 +43,9 @@
             Retrieve the current position of a vehicle
             </summary>
             <remarks>
-            Retrieves last recorded position in database for a registered vehicle
+            Retrieves last recorded position in database for a registered vehicle.<br/>
+            Only autheticated Admin can access this endpoint.<br/>
+            Admin role will be retrieved from JWT bearer token.
             </remarks>
             <param name="VehicleId">Id of a registered vehicle</param>
             <returns>Vehicle position object</returns>
@@ -50,7 +55,9 @@
             Retrieve the positions of a vehicle
             </summary>
             <remarks>
-            Retrieve the positions of a vehicle during a certain time, in order to display their journey on a map (maps drawing is out of scope)
+            Retrieve the positions of a vehicle during a certain time, in order to display their journey on a map (maps drawing is out of scope).<br/>
+            Only Admin can access this endpoint.<br/>
+            Admin role will be retrieved from JWT bearer token.
             </remarks>
             <param name="VehicleId">Id of a registered vehicle</param>
             <param name="FromTimeStampInSeconds">From: time stamp in seconds</param>
