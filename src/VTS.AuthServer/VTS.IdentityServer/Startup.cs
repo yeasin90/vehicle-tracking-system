@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using VTS.IdentityServer.IdentityConfiguration;
 
 namespace VTS.IdentityServer
 {
@@ -11,12 +12,12 @@ namespace VTS.IdentityServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddIdentityServer()
-                    .AddInMemoryClients(IdentityConfiguration.Clients)
-                    .AddInMemoryIdentityResources(IdentityConfiguration.IdentityResources)
-                    .AddInMemoryApiResources(IdentityConfiguration.ApiResources)
-                    .AddInMemoryApiScopes(IdentityConfiguration.ApiScopes)
-                    .AddTestUsers(IdentityConfiguration.TestUsers)
-                    .AddDeveloperSigningCredential();
+                .AddInMemoryClients(Clients.Get())
+                .AddInMemoryIdentityResources(Resources.GetIdentityResources())
+                .AddInMemoryApiResources(Resources.GetApiResources())
+                .AddInMemoryApiScopes(Scopes.GetApiScopes())
+                .AddTestUsers(Users.Get())
+                .AddDeveloperSigningCredential();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
