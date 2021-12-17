@@ -27,13 +27,13 @@ namespace VTS.Backend.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddPersistenceServiceRegistration(_configuration);
+            services.AddHttpClient<ITokenService, TokenService>();
+
+            services.AddDatabaseConfigurations(_configuration);
 
             services.AddApplicationServices();
 
-            services.AddHttpClient<ITokenService, TokenService>();
-
-            services.AddPersistenceAuthServerServiceRegistration(_configuration, _env);           
+            services.AddAuthServerConfigurations(_configuration, _env);           
 
             services.AddControllers()
                 // To fix reference looping issues on api response

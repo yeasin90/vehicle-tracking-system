@@ -12,7 +12,7 @@ namespace VTS.Backend.Infrastructure.AuthServer
 {
     public static class PersistenceAuthServerServiceRegistration
     {
-        public static IServiceCollection AddPersistenceAuthServerServiceRegistration(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment env)
+        public static IServiceCollection AddAuthServerConfigurations(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment env)
         {
             services.Configure<AuthorizationServerSettings>(options => configuration.GetSection("AuthorizationServerSettings").Bind(options));
 
@@ -41,30 +41,6 @@ namespace VTS.Backend.Infrastructure.AuthServer
                             ValidIssuer = authServerSettings.Value.Host,
                             ValidAudience = authServerSettings.Value.Audience
                         };
-
-                        //options.Events = new JwtBearerEvents()
-                        //{
-                        //    OnAuthenticationFailed = context =>
-                        //    {
-                        //        return Task.CompletedTask;
-                        //    },
-                        //    OnTokenValidated = context =>
-                        //    {
-                        //        return Task.CompletedTask;
-                        //    },
-                        //    OnMessageReceived = context =>
-                        //    {
-                        //        return Task.CompletedTask;
-                        //    },
-                        //    OnChallenge = context =>
-                        //    {
-                        //        return Task.CompletedTask;
-                        //    },
-                        //    OnForbidden = context =>
-                        //    {
-                        //        return Task.CompletedTask;
-                        //    },
-                        //};
                     });
 
             return services;

@@ -10,7 +10,7 @@ namespace VTS.Backend.Infrastructure.Persistence
 {
     public static class PersistenceServiceRegistration
     {
-        public static IServiceCollection AddPersistenceServiceRegistration(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddDatabaseConfigurations(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<SqliteDatabaseSettings>(options => configuration.GetSection("SqliteDatabaseSettings").Bind(options));
 
