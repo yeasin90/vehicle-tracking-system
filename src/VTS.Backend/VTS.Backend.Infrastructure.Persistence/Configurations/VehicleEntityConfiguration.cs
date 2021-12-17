@@ -10,9 +10,12 @@ namespace VTS.Backend.Infrastructure.Persistence.Configurations
         {
             builder.Property(e => e.SerialNumber)
                    .IsRequired();
+            builder.Property(e => e.UserId)
+                   .IsRequired();
 
             builder.HasIndex(e => e.Id);
             builder.HasIndex(e => e.SerialNumber);
+            builder.HasIndex(e => e.UserId);
         }
     }
 }

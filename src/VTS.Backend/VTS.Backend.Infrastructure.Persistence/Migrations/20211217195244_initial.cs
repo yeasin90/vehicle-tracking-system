@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace VTS.Backend.Infrastructure.Persistence.Migrations
 {
@@ -13,6 +14,7 @@ namespace VTS.Backend.Infrastructure.Persistence.Migrations
                     Id = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     SerialNumber = table.Column<string>(type: "TEXT", nullable: false),
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
                     CreatedDateTimeStampInSeconds = table.Column<double>(type: "REAL", nullable: false)
                 },
                 constraints: table =>
@@ -61,6 +63,11 @@ namespace VTS.Backend.Infrastructure.Persistence.Migrations
                 name: "IX_Vehicles_SerialNumber",
                 table: "Vehicles",
                 column: "SerialNumber");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vehicles_UserId",
+                table: "Vehicles",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

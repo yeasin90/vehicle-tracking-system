@@ -6,6 +6,7 @@ using VTS.Backend.Core.Application.Features.Vehicle.Command.RegisterVehicle;
 using VTS.Backend.Core.Application.Features.VehiclePosition.Command.RegisterPosition;
 using VTS.Backend.Core.Application.Features.VehiclePosition.Query.GetCurrentPosition;
 using VTS.Backend.Core.Application.Features.VehiclePosition.Query.GetTimeIntervalPositions;
+using VTS.Backend.Core.Application.Services;
 
 namespace VTS.Backend.Api.Controllers
 {
@@ -14,10 +15,12 @@ namespace VTS.Backend.Api.Controllers
     public class VehicleTrackerController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IUserService _userService;
 
-        public VehicleTrackerController(IMediator mediator)
+        public VehicleTrackerController(IMediator mediator, IUserService userService)
         {
             _mediator = mediator;
+            _userService = userService;
         }
 
         /// <summary>
@@ -29,6 +32,7 @@ namespace VTS.Backend.Api.Controllers
         [Route("device")]
         public async Task<ActionResult<VehicleDto>> RegisterDeviceAsync([FromBody]RegisterVehicleCommand command)
         {
+            var user = _userService.GetCurrentUser();
             var result = await _mediator.Send(command);
             return Ok(result);
         }

@@ -30,6 +30,8 @@ namespace VTS.Backend.Api
         {
             services.AddHttpClient<ITokenService, TokenService>();
 
+            services.AddHttpContextAccessor();
+
             services.AddDatabaseConfigurations(_configuration);
 
             services.AddApplicationServices();

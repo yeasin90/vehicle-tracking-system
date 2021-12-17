@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using VTS.Backend.Core.Application.Services;
 
 namespace VTS.Backend.Core.Application
 {
@@ -10,6 +11,8 @@ namespace VTS.Backend.Core.Application
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            services.AddScoped<IUserService, UserService>();
 
             return services;
         }
