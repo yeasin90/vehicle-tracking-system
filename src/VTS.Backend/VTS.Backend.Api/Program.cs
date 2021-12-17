@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using VTS.Backend.Infrastructure.Persistence;
 
 namespace VTS.Backend.Api
@@ -25,6 +27,15 @@ namespace VTS.Backend.Api
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.ConfigureAppConfiguration(appConfig =>
+                    {
+                        appConfig.SetBasePath(Environment.CurrentDirectory);
+                        appConfig.AddJsonFile("appsettings.json", false, true);
+                        appConfig.AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", false, true);
+                        appConfig.AddEnvironmentVariables();
+                        appConfig.Build();
+                    });
+
                     webBuilder.UseStartup<Startup>();
                 });
     }

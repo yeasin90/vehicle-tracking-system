@@ -15,6 +15,8 @@ namespace VTS.IdentityServer.IdentityConfiguration
                     ClientId = "VTS.Backend.Api",
                     ClientName = "VTS.Backend.Api",
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AccessTokenType = AccessTokenType.Jwt,
+                    AccessTokenLifetime = 1800,
                     ClientSecrets = new List<Secret> {new Secret("VTS.Backend.Api.Secret".Sha256())},
                     AllowedScopes = new List<string> { "app.api.vts.read", "app.api.vts.write" }
                 },
@@ -24,6 +26,11 @@ namespace VTS.IdentityServer.IdentityConfiguration
                     ClientName = "VTS.Frontend",
                     ClientSecrets = new List<Secret> {new Secret("VTS.Frontend.Secret".Sha256())},
                     AccessTokenType = AccessTokenType.Jwt,
+                    AccessTokenLifetime = 1800,
+                    // Below, GrantTypes.Code is not used, reason is there is no front-end application
+                    // A jwt token will be requested from IdentityServer using an api end point (AuthorizationController in VTS.Backend.Api project)
+                    // A Username and password of a registered user in IdentityServer will be supplied
+                    // That's why GrantTypes.ResourceOwnerPassword is used
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                     AllowedScopes = new List<string>
                     {

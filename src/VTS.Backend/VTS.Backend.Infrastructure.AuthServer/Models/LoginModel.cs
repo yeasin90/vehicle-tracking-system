@@ -1,4 +1,4 @@
-﻿namespace VTS.Backend.Infrastructure.AuthServer
+﻿namespace VTS.Backend.Infrastructure.AuthServer.Models
 {
     public class LoginModel
     {

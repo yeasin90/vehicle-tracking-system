@@ -20,6 +20,15 @@ namespace VTS.IdentityServer
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.ConfigureAppConfiguration(appConfig =>
+                    {
+                        appConfig.SetBasePath(Environment.CurrentDirectory);
+                        appConfig.AddJsonFile("appsettings.json", false, true);
+                        appConfig.AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", false, true);
+                        appConfig.AddEnvironmentVariables();
+                        appConfig.Build();
+                    });
+
                     webBuilder.UseStartup<Startup>();
                 });
     }

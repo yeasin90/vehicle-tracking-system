@@ -1,7 +1,10 @@
 ﻿using IdentityModel.Client;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using System.Net.Http;
 using System.Threading.Tasks;
+using VTS.Backend.Infrastructure.AuthServer.Exceptions;
+using VTS.Backend.Infrastructure.AuthServer.Models;
+using VTS.Backend.Infrastructure.AuthServer.Settings;
 using static VTS.Backend.Infrastructure.AuthServer.OidcConstants;
 
 namespace VTS.Backend.Infrastructure.AuthServer
@@ -10,26 +13,31 @@ namespace VTS.Backend.Infrastructure.AuthServer
     {
         private readonly DiscoveryDocumentResponse _discoveryDocument;
         private readonly HttpClient _httpClient;
-        private readonly IConfiguration _configuration;
+        private readonly AuthorizationServerSettings _authorizationServer;
 
-        public TokenService(HttpClient httpClient, IConfiguration configuration)
+        public TokenService(HttpClient httpClient, IOptions<AuthorizationServerSettings> authorizationServer)
         {
-            _configuration = configuration;
+            _authorizationServer = authorizationServer.Value;
             _httpClient = httpClient;
             _discoveryDocument = httpClient.GetDiscoveryDocumentAsync(
-                $"{configuration["AuthenticationServer:Host"]}/{Oidc.DiscoveryConfiguration}").Result;
+                $"{_authorizationServer.Host}/{Oidc.DiscoveryConfiguration}").Result;
         }
 
-        public async Task<TokenResponse> GetJwtTokenAsync(string username, string password)
+        public async Task<TokenResponse> GetJwtTokenAsync(LoginModel model)
         {
             var tokenResponse = await _httpClient.RequestPasswordTokenAsync(new PasswordTokenRequest()
             {
                 Address = _discoveryDocument.TokenEndpoint,
-                ClientId = _configuration["AuthenticationServer:ClientId"],
-                ClientSecret = _configuration["AuthenticationServer:ClientSecret"],
-                UserName = username,
-                Password = password
+                ClientId = _authorizationServer.FrontEndClientId,
+                ClientSecret = _authorizationServer.FrotEndClientSecret,
+                UserName = model.Username,
+                Password = model.Password
             });
+
+            if (tokenResponse.IsError)
+            {
+                throw new AuthServerException($"Failed to get token. {tokenResponse.Error}");
+            }
 
             return tokenResponse;
         }
