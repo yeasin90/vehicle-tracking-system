@@ -23,6 +23,7 @@ namespace VTS.Backend.Api.Controllers
         /// <summary>
         ///  Register a vehicle
         /// </summary>
+        /// <remarks>A unique serial number (alphanumeric) must be supplied in request body</remarks>
         /// <returns>Vehicle object created in database</returns>
         [HttpPost]
         [Route("device")]
@@ -35,6 +36,10 @@ namespace VTS.Backend.Api.Controllers
         /// <summary>
         /// Record the position of a registered vehicle
         /// </summary>
+        /// <remarks>
+        /// VehicleId, Latitude and Longitude must be supplied in request body.<br/>
+        /// Vehicle with VehicleId must be registered in the system.
+        /// </remarks>
         /// <returns>Vehicle position object created in database</returns>
         [HttpPost]
         [Route("device/position")]

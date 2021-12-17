@@ -18,10 +18,10 @@ namespace VTS.Backend.Api.Controllers
         /// <summary>
         ///  Request a JWT token of a user from Identity Server
         /// </summary>
-        /// <remarks>IdentityServer must be up and running. User must be registered in IdentityServer
-        /// Use below credentials for trial (currently setup in IdentityServer):
-        /// Username: user1, Password: user1
-        /// Username: user2, Password: user2
+        /// <remarks>IdentityServer must be up and running. User must be registered in IdentityServer.<br/><br/>
+        /// Use below credentials for trial (currently setup in IdentityServer):<br/><br/>
+        /// Username: user1, Password: user1<br/>
+        /// Username: user2, Password: user2<br/>
         /// Username: admin1, Password: admin1
         /// </remarks>
         /// <returns>Returns JWT token</returns>

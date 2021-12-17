@@ -8,7 +8,12 @@
             <summary>
              Request a JWT token of a user from Identity Server
             </summary>
-            <remarks>IdentityServer must be up and running. User must be registered in IdentityServer</remarks>
+            <remarks>IdentityServer must be up and running. User must be registered in IdentityServer.<br/><br/>
+            Use below credentials for trial (currently setup in IdentityServer):<br/><br/>
+            Username: user1, Password: user1<br/>
+            Username: user2, Password: user2<br/>
+            Username: admin1, Password: admin1
+            </remarks>
             <returns>Returns JWT token</returns>
             <param name="Username">Username of registered user in IdentityServer</param>
             <param name="Password">Password of registered user in IdentityServer</param>
@@ -17,12 +22,17 @@
             <summary>
              Register a vehicle
             </summary>
+            <remarks>A unique serial number (alphanumeric) must be supplied in request body</remarks>
             <returns>Vehicle object created in database</returns>
         </member>
         <member name="M:VTS.Backend.Api.Controllers.VehicleTrackerController.RegisterDevicePositionAsync(VTS.Backend.Core.Application.Features.VehiclePosition.Command.RegisterPosition.RegisterPositionCommand)">
             <summary>
             Record the position of a registered vehicle
             </summary>
+            <remarks>
+            VehicleId, Latitude and Longitude must be supplied in request body.<br/>
+            Vehicle with VehicleId must be registered in the system.
+            </remarks>
             <returns>Vehicle position object created in database</returns>
         </member>
         <member name="M:VTS.Backend.Api.Controllers.VehicleTrackerController.GetCurrentPositionAsync(VTS.Backend.Core.Application.Features.VehiclePosition.Query.GetCurrentPosition.GetCurrentPositionQuery)">

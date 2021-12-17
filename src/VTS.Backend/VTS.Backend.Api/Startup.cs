@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
 using System.Reflection;
+using VTS.Backend.Api.Extensions;
 using VTS.Backend.Core.Application;
 using VTS.Backend.Core.Application.Middleware;
 using VTS.Backend.Infrastructure.AuthServer;
@@ -45,14 +46,7 @@ namespace VTS.Backend.Api
                 options.LowercaseUrls = true;
             });
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Vehicle tracking system API", Version = "v1" });
-
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
-            });
+            services.AddSwaggerConfiguration();
         }
 
         public void Configure(IApplicationBuilder app)
