@@ -26,7 +26,9 @@ namespace VTS.Backend.Api.Controllers
         /// </summary>
         /// <remarks>A unique serial number (alphanumeric) must be supplied in request body.<br/>
         /// Every vehicle will be associated with an authenticated user or admin (from IdentityServer).<br/>
-        /// Id of the authenticated user or admin will be retrieved from JWT bearer token.
+        /// Id of the authenticated user or admin will be retrieved from JWT bearer token.<br/><br/>
+        /// To request a JWT token, hit <strong>api/authorization/token</strong> endpoint from Authorization section above.<br/>
+        /// Once you received the token, copy the <strong>access_token</strong> and place it in <strong>Authorize button</strong> in Swagger
         /// </remarks>
         /// <returns>Vehicle object created in database</returns>
         [HttpPost]
