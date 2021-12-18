@@ -6,9 +6,9 @@ There are two back end projects under this solution:
 1. VTS.AuthServer (IdentityServer)
 2. VTS.Backend (Backend api server)
 
-Backend api sever will be launched with swagger UI. In order to work with Vehicle api, you need to generate a JWT token. From the swagger UI, check **Authorization** endpoint to generate a JWT token (to know which credentials to use, check description). Once you received the token, set the token value from **Authorize** button in swagger UI. At this point, you can now play with vehicle apis from swagger.
+Swagger UI has been integrated with Backend api sever. To work with Vehicle api, a JWT access token is required. From the swagger UI, check **Authorization** endpoint to generate a JWT token (check endpoint description for available credentials). Once you received the token, set the token value by pressing **Authorize** button in swagger UI. Now, you can now play with vehicle apis from swagger.
 
-**NB:** Make sure VTS.AuthServer (IdentityServer) is up and running upfron. Otherwise, token will not be generated/validated.
+**NB:** Make sure VTS.AuthServer (IdentityServer) is up and running upfront. Otherwise, token will not be generated/validated.
 
 ## Pre-requisites:
 - Visual Studio 2019 or higher
