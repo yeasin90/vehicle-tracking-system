@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using VTS.Backend.Core.Application.Features.Vehicle.Command.RegisterVehicle;
 using VTS.Backend.Core.Application.Features.VehiclePosition.Command.RegisterPosition;
@@ -62,7 +63,7 @@ namespace VTS.Backend.Api.Controllers
         /// </remarks>
         /// <param name="VehicleId">Id of a registered vehicle</param>
         /// <returns>Vehicle position object</returns>
-        //[Authorize(Roles = $"{VtsUserRole.Admin.ToString()}")]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("vehicle/{VehicleId}/position")]
         public async Task<ActionResult<VehiclePositionDto>> GetCurrentPositionAsync(GetCurrentPositionQuery query)
@@ -83,10 +84,10 @@ namespace VTS.Backend.Api.Controllers
         /// <param name="FromTimeStampInSeconds">From: time stamp in seconds</param>
         /// <param name="ToTimeStampInSeconds">To: time stamp in seconds</param>
         /// <returns>List of Vehicle position object</returns>
-        //[Authorize(Roles = $"{VtsUserRole.Admin.ToString()}")]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("vehicle/{VehicleId}/position/{FromTimeStampInSeconds}/{ToTimeStampInSeconds}")]
-        public async Task<ActionResult> GetPositionsAsync(GetTimeIntervalPositionsQuery query)
+        public async Task<ActionResult<IEnumerable<VehiclePositionDto>>> GetPositionsAsync(GetTimeIntervalPositionsQuery query)
         {
             var result = await _mediator.Send(query);
             return Ok(result);

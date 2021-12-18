@@ -30,7 +30,6 @@ namespace VTS.IdentityServer.IdentityConfiguration
                     DisplayName = "Vehicle Tracking System Backend Api",
                     Description = "Allow the application to access Vehicle Tracking System Backend Api on your behalf",
                     Scopes = new List<string> { "app.api.vts.read", "app.api.vts.write"},
-                    ApiSecrets = new List<Secret> {new Secret("ProCodeGuide".Sha256())},
                     UserClaims = new List<string> {"role"}
                 }
             };
