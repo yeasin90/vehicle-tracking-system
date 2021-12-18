@@ -1,5 +1,6 @@
 ﻿using IdentityModel.Client;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using VTS.Backend.Infrastructure.AuthServer.Exceptions;
@@ -23,7 +24,7 @@ namespace VTS.Backend.Infrastructure.AuthServer
                 $"{_authorizationServer.Host}/{Oidc.DiscoveryConfiguration}").Result;
         }
 
-        public async Task<TokenResponse> GetJwtTokenAsync(LoginModel model)
+        public async Task<JObject> GetJwtTokenAsync(LoginModel model)
         {
             var tokenResponse = await _httpClient.RequestPasswordTokenAsync(new PasswordTokenRequest()
             {
@@ -39,7 +40,7 @@ namespace VTS.Backend.Infrastructure.AuthServer
                 throw new AuthServerException($"Failed to get token. {tokenResponse.Error}");
             }
 
-            return tokenResponse;
+            return tokenResponse.Json;
         }
     }
 }

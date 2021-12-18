@@ -26,11 +26,18 @@ namespace VTS.IdentityServer.IdentityConfiguration
             {
                 new ApiResource
                 {
-                    Name = "app.api.vts",
-                    DisplayName = "Vehicle Tracking System Backend Api",
-                    Description = "Allow the application to access Vehicle Tracking System Backend Api on your behalf",
-                    Scopes = new List<string> { "app.api.vts.read", "app.api.vts.write"},
+                    Name = "app.vts.frontend",
+                    DisplayName = "Vehicle Tracking System Frontend",
+                    Description = "Allow the frontend to access Vehicle Tracking System Backend Api on your behalf",
+                    Scopes = new List<string> { "app.vts.frontend.read", "app.vts.frontend.write"},
                     UserClaims = new List<string> {"role"}
+                },
+                new ApiResource
+                {
+                    Name = "app.vts.api",
+                    DisplayName = "Vehicle Tracking System Backend Api",
+                    Description = "Allow other API (machine to machine) to access Vehicle Tracking System Backend Api on your behalf",
+                    Scopes = new List<string> { "app.vts.api.read", "app.vts.api.write"}
                 }
             };
         }

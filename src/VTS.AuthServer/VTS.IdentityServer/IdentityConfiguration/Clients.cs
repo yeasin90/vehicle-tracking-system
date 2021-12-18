@@ -18,7 +18,7 @@ namespace VTS.IdentityServer.IdentityConfiguration
                     AccessTokenType = AccessTokenType.Jwt,
                     AccessTokenLifetime = 1800,
                     ClientSecrets = new List<Secret> {new Secret("VTS.Backend.Api.Secret".Sha256())},
-                    AllowedScopes = new List<string> { "app.api.vts.read", "app.api.vts.write" }
+                    AllowedScopes = new List<string> { "app.vts.api.read", "app.vts.api.write" }
                 },
                 new Client
                 {
@@ -38,8 +38,8 @@ namespace VTS.IdentityServer.IdentityConfiguration
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Email,
                         "role",
-                        "app.api.vts.read",
-                        "app.api.vts.write"
+                        "app.vts.frontend.read",
+                        "app.vts.frontend.write"
                     }
                 }
             };

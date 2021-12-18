@@ -32,7 +32,7 @@ namespace VTS.Backend.Api.Controllers
         public async Task<ActionResult> GetTokenAsync([FromBody] LoginModel model)
         {
             var result = await _tokenService.GetJwtTokenAsync(model);
-            return Ok(result?.AccessToken);
+            return Ok(result);
         }
     }
 }
