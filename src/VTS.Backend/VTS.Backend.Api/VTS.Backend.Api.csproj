@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -15,6 +17,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.2" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.2.2" />
   </ItemGroup>
@@ -24,6 +27,12 @@
     <ProjectReference Include="..\VTS.Backend.Infrastructure.AuthServer\VTS.Backend.Infrastructure.AuthServer.csproj" />
     <ProjectReference Include="..\VTS.Backend.Infrastructure.GoogleMapService\VTS.Backend.Infrastructure.GoogleMapService.csproj" />
     <ProjectReference Include="..\VTS.Backend.Infrastructure.Persistence\VTS.Backend.Infrastructure.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="VTS.Backend.Api.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
