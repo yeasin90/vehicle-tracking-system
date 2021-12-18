@@ -32,7 +32,7 @@ namespace VTS.Backend.Core.Application.Features.VehiclePosition.Command.Register
         public async Task<VehiclePositionDto> Handle(RegisterPositionCommand request, CancellationToken cancellationToken)
         {
             var currentUser = _userService.GetCurrentUser();
-            var existingVehicle = await _vehicleRepository.GetByUserIdAndVehicleIdAsync(currentUser.UserId, request.VehicleId);
+            var existingVehicle = await _vehicleRepository.Find(x => x.UserId == currentUser.UserId && x.Id == request.VehicleId);
 
             if (request.Latitude == 0 || request.Longitude == 0)
                 throw new AppException($"{nameof(request.Latitude)} or {nameof(request.Longitude)} cannot be zero");
@@ -47,7 +47,7 @@ namespace VTS.Backend.Core.Application.Features.VehiclePosition.Command.Register
                 VehicleId = request.VehicleId
             };
 
-            var savedEntity = await _vehiclePositionRepository.AddAsync(entity);
+            var savedEntity = await _vehiclePositionRepository.Insert(entity);
             var result = _mapper.Map<VehiclePositionDto>(savedEntity);
             return result;
         }

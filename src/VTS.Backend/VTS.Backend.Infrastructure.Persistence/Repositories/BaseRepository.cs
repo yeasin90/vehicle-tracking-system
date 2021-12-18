@@ -1,55 +1,120 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using VTS.Backend.Core.Application.Contracts;
 
 namespace VTS.Backend.Infrastructure.Persistence.Repositories
 {
-    public class BaseRepository<T> : IAsyncRepository<T> where T : class
+    public class BaseRepository<TEntity> : IAsyncRepository<TEntity> where TEntity : class
     {
-        protected readonly VtsDbContext _dbContext;
+        protected VtsDbContext _dbContext;
+        protected DbSet<TEntity> DbSet;
 
         public BaseRepository(VtsDbContext dbContext)
         {
             _dbContext = dbContext;
+            DbSet = _dbContext.Set<TEntity>();
         }
 
-        public virtual async Task<T> GetByIdAsync(long id)
+        public virtual void Delete(object id)
         {
-            return await _dbContext.Set<T>().FindAsync(id);
+            var entityToDelete = DbSet.Find(id);
+            Delete(entityToDelete);
         }
 
-        public async Task<IReadOnlyList<T>> ListAllAsync()
+        public virtual void Delete(TEntity entity)
         {
-            return await _dbContext.Set<T>().ToListAsync();
+            if (_dbContext.Entry(entity).State == EntityState.Detached)
+            {
+                DbSet.Attach(entity);
+            }
+            DbSet.Remove(entity);
         }
 
-        public async virtual Task<IReadOnlyList<T>> GetPagedReponseAsync(int page, int size)
+        public virtual void DeleteAll(Expression<Func<TEntity, bool>> predicate)
         {
-            return await _dbContext.Set<T>().Skip((page - 1) * size).Take(size).AsNoTracking().ToListAsync();
+            var entityListToDelete = DbSet.Where(predicate);
+            foreach (var entityToDelete in entityListToDelete)
+            {
+                Delete(entityToDelete);
+            }
         }
 
-        public async Task<T> AddAsync(T entity)
+        public virtual void Dispose()
         {
-            await _dbContext.Set<T>().AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
+        public virtual async Task<TEntity> Find(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties)
+        {
+            IQueryable<TEntity> query = DbSet;
+
+            if (includeProperties != null && includeProperties.Length > 0)
+            {
+                foreach (Expression<Func<TEntity, object>> include in includeProperties)
+                    query = query.Include(include);
+            }
+
+            return await DbSet.Where(predicate).FirstOrDefaultAsync();
+        }
+
+        public virtual IQueryable<TEntity> FindAll(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties)
+        {
+            IQueryable<TEntity> query = DbSet;
+
+            if (includeProperties != null && includeProperties.Length > 0)
+            {
+                foreach (Expression<Func<TEntity, object>> include in includeProperties)
+                    query = query.Include(include);
+            }
+
+            return query.Where(predicate);
+        }
+
+        public virtual async Task<TEntity> FindById(object id)
+        {
+            return await DbSet.FindAsync(id);
+        }
+
+        public virtual async Task<TEntity> Insert(TEntity entity)
+        {
+            DbSet.Add(entity);
+            await Save();
             return entity;
         }
 
-        public async Task UpdateAsync(T entity)
+        public virtual async Task Save()
         {
-            _dbContext.Entry(entity).State = EntityState.Modified;
-            await _dbContext.SaveChangesAsync();
+            using (var transaction = _dbContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    await _dbContext.SaveChangesAsync();
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                }
+            }
         }
 
-        public async Task DeleteAsync(T entity)
+        public virtual void Update(TEntity entity)
         {
-            _dbContext.Set<T>().Remove(entity);
-            await _dbContext.SaveChangesAsync();
+            DbSet.Attach(entity);
+            _dbContext.Entry(entity).State = EntityState.Modified;
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _dbContext.Dispose();
+                _dbContext = null;
+            }
         }
     }
 }

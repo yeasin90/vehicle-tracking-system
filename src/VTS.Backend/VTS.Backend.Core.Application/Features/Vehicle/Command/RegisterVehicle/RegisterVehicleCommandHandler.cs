@@ -27,7 +27,7 @@ namespace VTS.Backend.Core.Application.Features.Vehicle.Command.RegisterVehicle
         {
             if (string.IsNullOrWhiteSpace(request.SerialNumber))
                 throw new AppException($"{nameof(request.SerialNumber)} cannot be empty");
-            if (await _vehicleRepository.GetBySerialNumberAsync(request.SerialNumber) != null)
+            if (await _vehicleRepository.Find(x => x.SerialNumber == request.SerialNumber) != null)
                 throw new AppException($"A vehicle with same serial:{request.SerialNumber} already exist");
 
             var currentUser = _userService.GetCurrentUser();
@@ -39,7 +39,7 @@ namespace VTS.Backend.Core.Application.Features.Vehicle.Command.RegisterVehicle
                 CreatedDateTimeStampInSeconds = DateTime.UtcNow.ToUnixTimeStampInSeconds()
             };
 
-            var savedEntity = await _vehicleRepository.AddAsync(entity);
+            var savedEntity = await _vehicleRepository.Insert(entity);
             return _mapper.Map<VehicleDto>(savedEntity);
         }
     }

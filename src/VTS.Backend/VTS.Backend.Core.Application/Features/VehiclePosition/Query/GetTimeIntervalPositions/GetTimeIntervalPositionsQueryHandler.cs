@@ -25,12 +25,15 @@ namespace VTS.Backend.Core.Application.Features.VehiclePosition.Query.GetTimeInt
 
         public async Task<IEnumerable<VehiclePositionDto>> Handle(GetTimeIntervalPositionsQuery request, CancellationToken cancellationToken)
         {
-            var item = await _vehicleRepository.GetByIdAsync(request.VehicleId);
+            var item = await _vehicleRepository.Find(x => x.Id == request.VehicleId);
 
             if (item == null)
                 throw new KeyNotFoundException($"Cannot find any vehicle with id:{ request.VehicleId }");
 
-            var entities = await _vehiclePositionRepository.GetPositionsAsync(request.VehicleId, request.FromTimeStampInSeconds, request.ToTimeStampInSeconds);
+            var entities = await _vehiclePositionRepository.Find(x => x.VehicleId == request.VehicleId
+            && x.CreatedDateTimeStampInSeconds >= request.FromTimeStampInSeconds
+            && x.CreatedDateTimeStampInSeconds <= request.ToTimeStampInSeconds);
+                
             var results = _mapper.Map<IEnumerable<VehiclePositionDto>>(entities);
             return results;
         }

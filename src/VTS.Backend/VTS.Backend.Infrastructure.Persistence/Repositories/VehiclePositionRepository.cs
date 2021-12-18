@@ -22,24 +22,5 @@ namespace VTS.Backend.Infrastructure.Persistence.Repositories
                 .FirstOrDefaultAsync();
             return result;
         }
-
-        public async Task<IEnumerable<VehiclePosition>> GetPositionsAsync(long vehicleId, double fromTimeStampInSeconds, double toTimeStampInSeconds)
-        {
-            var result = await _dbContext.VehiclePositions
-                .Where(x => x.VehicleId == vehicleId 
-                && x.CreatedDateTimeStampInSeconds >= fromTimeStampInSeconds
-                && x.CreatedDateTimeStampInSeconds <= toTimeStampInSeconds)
-                .OrderBy(x => x.CreatedDateTimeStampInSeconds)
-                .Select(x => new VehiclePosition()
-                {
-                    Id = x.Id,
-                    Latitude = x.Latitude,
-                    Longitude = x.Longitude,
-                    VehicleId = x.VehicleId,
-                    CreatedDateTimeStampInSeconds = x.CreatedDateTimeStampInSeconds
-                })
-                .ToListAsync();
-            return result;
-        }
     }
 }
