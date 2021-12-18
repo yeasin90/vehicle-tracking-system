@@ -1,22 +1,30 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using VTS.IdentityServer.Extensions;
 using VTS.IdentityServer.IdentityConfiguration;
+using VTS.IdentityServer.Settings;
 
 namespace VTS.IdentityServer
 {
     public class Startup
     {
         private readonly IWebHostEnvironment _env;
-        public Startup(IWebHostEnvironment env)
+        private readonly IConfiguration _configuration;
+        public Startup(IWebHostEnvironment env, IConfiguration configuration)
         {
+            _configuration = configuration;
             _env = env;
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.CorsConfigurations(_configuration);
+
             // in-memory configurations for development purpose.
             // should be replaced with actual database in production
             var identityServiceBuilder = services.AddIdentityServer()
@@ -27,7 +35,7 @@ namespace VTS.IdentityServer
                 .AddTestUsers(Users.Get());
 
             // Only for developemnt. Real certificate needs to be used on Production
-            if(_env.IsDevelopment())
+            if (_env.IsDevelopment())
             {
                 identityServiceBuilder.AddDeveloperSigningCredential();
             }
@@ -40,7 +48,10 @@ namespace VTS.IdentityServer
                 app.UseDeveloperExceptionPage();
             }
 
+            var corsSettings = app.ApplicationServices.GetService<IOptions<CorsSettings>>();
+
             app.UseRouting();
+            app.UseCors(corsSettings.Value.Name);
             app.UseIdentityServer();
             app.UseEndpoints(endpoints =>
             {
