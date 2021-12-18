@@ -28,7 +28,7 @@ namespace VTS.IdentityServer
             if(_env.IsDevelopment())
             {
                 identityServiceBuilder.AddDeveloperSigningCredential();
-            }    
+            }
         }
 
         public void Configure(IApplicationBuilder app)
@@ -42,7 +42,9 @@ namespace VTS.IdentityServer
             app.UseIdentityServer();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
+                // This default /index.html was added by IdentityServer4 nuget
+                // Instead of adding a pages, just added a message to notify server is up
+                endpoints.MapGet("/index.html", async context =>
                 {
                     await context.Response.WriteAsync("Auth server up and running!");
                 });
