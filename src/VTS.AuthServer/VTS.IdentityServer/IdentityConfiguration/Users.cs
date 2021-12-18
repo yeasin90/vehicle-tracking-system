@@ -16,7 +16,7 @@ namespace VTS.IdentityServer.IdentityConfiguration
                 {
                     SubjectId = new Guid("c81c4032-859e-4e3c-817d-541163929df5").ToString(),
                     Username = "user1",
-                    Password = "user1",
+                    Password = "userpassword1",
                     Claims = new List<Claim> 
                     {
                         new Claim(JwtClaimTypes.Role, "User")
@@ -26,7 +26,7 @@ namespace VTS.IdentityServer.IdentityConfiguration
                 {
                     SubjectId = new Guid("8e29eb61-c78c-4f24-a040-bcd822991502").ToString(),
                     Username = "user2",
-                    Password = "user2",
+                    Password = "userpassword2",
                     Claims = new List<Claim>
                     {
                         new Claim(JwtClaimTypes.Role, "User")
@@ -36,7 +36,7 @@ namespace VTS.IdentityServer.IdentityConfiguration
                 {
                     SubjectId = new Guid("15fcb5c0-a096-41c6-8e93-4ecd81c20b4e").ToString(),
                     Username = "admin1",
-                    Password = "admin1",
+                    Password = "adminpassword1",
                     Claims = new List<Claim>
                     {
                         new Claim(JwtClaimTypes.Role, "Admin")
