@@ -7,6 +7,7 @@ using VTS.Backend.Api.Extensions;
 using VTS.Backend.Core.Application;
 using VTS.Backend.Core.Application.Middleware;
 using VTS.Backend.Infrastructure.AuthServer;
+using VTS.Backend.Infrastructure.GoogleMapService;
 using VTS.Backend.Infrastructure.Persistence;
 
 namespace VTS.Backend.Api
@@ -32,7 +33,9 @@ namespace VTS.Backend.Api
 
             services.AddApplicationServices();
 
-            services.AddAuthServerConfigurations(_configuration, _env);           
+            services.AddAuthServerConfigurations(_configuration, _env);
+
+            services.AddGoogleMapServices(_configuration);
 
             services.AddControllers()
                 // To fix reference looping issues on api response

@@ -8,7 +8,7 @@ using VTS.Backend.Infrastructure.AuthServer.Settings;
 
 namespace VTS.Backend.Infrastructure.AuthServer
 {
-    public static class PersistenceAuthServerServiceRegistration
+    public static class AuthServerServiceRegistrations
     {
         public static IServiceCollection AddAuthServerConfigurations(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment env)
         {

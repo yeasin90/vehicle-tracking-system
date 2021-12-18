@@ -5,7 +5,7 @@ using VTS.Backend.Core.Application.Services;
 
 namespace VTS.Backend.Core.Application
 {
-    public static class ApplicationServiceRegistration
+    public static class ApplicationServiceRegistrations
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {

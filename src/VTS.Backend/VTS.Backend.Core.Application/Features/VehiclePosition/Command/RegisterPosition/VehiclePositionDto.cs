@@ -7,6 +7,7 @@ namespace VTS.Backend.Core.Application.Features.VehiclePosition.Command.Register
     {
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        public string LocationName { get; set; }
         public long VehicleId { get; set; }
         public VehicleDto Vehicle { get; set; }
     }

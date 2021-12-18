@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\VTS.Backend.Core.Domain\VTS.Backend.Core.Domain.csproj" />
+    <ProjectReference Include="..\VTS.Backend.Infrastructure.GoogleMapService\VTS.Backend.Infrastructure.GoogleMapService.csproj" />
   </ItemGroup>
 
 </Project>

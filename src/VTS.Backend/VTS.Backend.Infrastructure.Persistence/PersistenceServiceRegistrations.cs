@@ -8,7 +8,7 @@ using VTS.Backend.Infrastructure.Persistence.Settings;
 
 namespace VTS.Backend.Infrastructure.Persistence
 {
-    public static class PersistenceServiceRegistration
+    public static class PersistenceServiceRegistrations
     {
         public static IServiceCollection AddDatabaseConfigurations(this IServiceCollection services, IConfiguration configuration)
         {
