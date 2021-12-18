@@ -22,6 +22,7 @@ namespace VTS.Backend.Infrastructure.AuthServer
             _httpClient = httpClient;
         }
 
+        // Related to GrantTypes.ResourceOwnerPassword client in IdentityServer
         public async Task<JObject> GetJwtTokenAsync(LoginModel model)
         {
             Console.WriteLine($"{_authorizationServer.Host}/{Oidc.DiscoveryConfiguration}");

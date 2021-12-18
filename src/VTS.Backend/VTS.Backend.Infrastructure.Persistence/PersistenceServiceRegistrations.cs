@@ -16,6 +16,8 @@ namespace VTS.Backend.Infrastructure.Persistence
 
             var dbSettings = services.BuildServiceProvider().GetService<IOptions<SqliteDatabaseSettings>>();
 
+            // Used Sqlite for Proof of concept
+            // Can be replaced with any centralized relationalt DB or NoSql DB
             services.AddDbContext<VtsDbContext>(options =>
                 options.UseSqlite(dbSettings.Value.ConnectionString));
 
