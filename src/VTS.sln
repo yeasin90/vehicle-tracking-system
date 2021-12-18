@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VTS.Backend.Infrastructure.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VTS.Backend.Infrastructure.GoogleMapService", "VTS.Backend\VTS.Backend.Infrastructure.GoogleMapService\VTS.Backend.Infrastructure.GoogleMapService.csproj", "{D5B1FAAE-F85E-496C-AFB1-9354564CFB94}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{6C228131-D7EB-4B0B-AE48-F15D024E55BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{D5B1FAAE-F85E-496C-AFB1-9354564CFB94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5B1FAAE-F85E-496C-AFB1-9354564CFB94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5B1FAAE-F85E-496C-AFB1-9354564CFB94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C228131-D7EB-4B0B-AE48-F15D024E55BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C228131-D7EB-4B0B-AE48-F15D024E55BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C228131-D7EB-4B0B-AE48-F15D024E55BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C228131-D7EB-4B0B-AE48-F15D024E55BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

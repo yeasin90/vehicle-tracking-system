@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  vtsidentityserver:
+    image: ${DOCKER_REGISTRY-}vtsidentityserver
+    build:
+      context: .
+      dockerfile: VTS.AuthServer/VTS.IdentityServer/Dockerfile
+    ports:
+      - "5000:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - CorsSettings__AllowedHosts__0=http://vtsbackendapi
+
+  vtsbackendapi:
+    image: ${DOCKER_REGISTRY-}vtsbackendapi
+    build:
+      context: .
+      dockerfile: VTS.Backend/VTS.Backend.Api/Dockerfile
+    ports:
+      - "5001:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - AuthorizationServerSettings__Host=http://vtsidentityserver
+
