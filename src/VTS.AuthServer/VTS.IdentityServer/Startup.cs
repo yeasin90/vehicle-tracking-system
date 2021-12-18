@@ -17,6 +17,8 @@ namespace VTS.IdentityServer
 
         public void ConfigureServices(IServiceCollection services)
         {
+            // in-memory configurations for development purpose.
+            // should be replaced with actual database in production
             var identityServiceBuilder = services.AddIdentityServer()
                 .AddInMemoryClients(Clients.Get())
                 .AddInMemoryIdentityResources(Resources.GetIdentityResources())
