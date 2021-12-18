@@ -22,4 +22,5 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - AuthorizationServerSettings__Host=http://vtsidentityserver
+      - GoogleMapSettings__ApiKey=your-api-key
 

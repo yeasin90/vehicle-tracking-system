@@ -1,6 +1,7 @@
 ﻿using IdentityModel.Client;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using VTS.Backend.Infrastructure.AuthServer.Exceptions;
@@ -12,7 +13,6 @@ namespace VTS.Backend.Infrastructure.AuthServer
 {
     public class TokenService : ITokenService
     {
-        private readonly DiscoveryDocumentResponse _discoveryDocument;
         private readonly HttpClient _httpClient;
         private readonly AuthorizationServerSettings _authorizationServer;
 
@@ -20,15 +20,15 @@ namespace VTS.Backend.Infrastructure.AuthServer
         {
             _authorizationServer = authorizationServer.Value;
             _httpClient = httpClient;
-            _discoveryDocument = httpClient.GetDiscoveryDocumentAsync(
-                $"{_authorizationServer.Host}/{Oidc.DiscoveryConfiguration}").Result;
         }
 
         public async Task<JObject> GetJwtTokenAsync(LoginModel model)
         {
+            Console.WriteLine($"{_authorizationServer.Host}/{Oidc.DiscoveryConfiguration}");
+
             var tokenResponse = await _httpClient.RequestPasswordTokenAsync(new PasswordTokenRequest()
             {
-                Address = _discoveryDocument.TokenEndpoint,
+                Address = $"{_authorizationServer.Host}/{Oidc.Token}",
                 ClientId = _authorizationServer.FrontEndClientId,
                 ClientSecret = _authorizationServer.FrotEndClientSecret,
                 UserName = model.Username,

@@ -23,7 +23,7 @@ namespace VTS.IdentityServer
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.CorsConfigurations(_configuration);
+            //services.CorsConfigurations(_configuration);
 
             // in-memory configurations for development purpose.
             // should be replaced with actual database in production
@@ -51,7 +51,7 @@ namespace VTS.IdentityServer
             var corsSettings = app.ApplicationServices.GetService<IOptions<CorsSettings>>();
 
             app.UseRouting();
-            app.UseCors(corsSettings.Value.Name);
+            //app.UseCors(corsSettings.Value.Name);
             app.UseIdentityServer();
             app.UseEndpoints(endpoints =>
             {
