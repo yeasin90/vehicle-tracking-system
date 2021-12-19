@@ -49,7 +49,7 @@ When you hit the backend server url in browser (http://localhost:5001), you will
 1. Authorization (for getting token with username/password)
 2. Vehicle (endpoints for vehicle related tasks)
 
-To play with Vehicle endpoints, you must have an JWT access token. To get an authenticated JWT token, try the endpoint from Authorization (description of the endpoint contains credentials to use). Once you received the token, set the token value by pressing **Authorize** button from SwaggerUI. Vehicle api's should be authorized afterwards and you can start play with the Vehicle endpoints.
+To play with Vehicle endpoints, you must have a valid JWT access token. To get an authenticated JWT token, try the endpoint from Authorization (description of the endpoint contains credentials to use). After getting response, copy **access_token** value and set the token value by pressing **Authorize** button from SwaggerUI. Vehicle api's should be authorized afterwards and you can start playaround.
 
 **NB:** Make sure VTS.AuthServer (IdentityServer) is up and running upfront. Otherwise, token will not be generated/validated.
 
