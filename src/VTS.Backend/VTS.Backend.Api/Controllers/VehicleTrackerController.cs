@@ -26,9 +26,10 @@ namespace VTS.Backend.Api.Controllers
         /// </summary>
         /// <remarks>A unique serial number (alphanumeric) must be supplied in request body.<br/>
         /// Every vehicle will be associated with an authenticated user or admin (from IdentityServer).<br/>
-        /// Id of the authenticated user or admin will be retrieved from JWT bearer token.<br/><br/>
-        /// To request a JWT token, hit <strong>api/authorization/token</strong> endpoint from Authorization section above.<br/>
-        /// Once you received the token, copy the <strong>access_token</strong> and place it in <strong>Authorize button</strong> in Swagger
+        /// Id of the authenticated user or admin will be retrieved from JWT bearer token.<br/>
+        /// Both User and Admins can access this endpoint.<br/><br/>
+        /// To get an authenticated JWT token, try the endpoint from Authorization(description of the endpoint contains credentials to use). 
+        /// After getting response, copy <strong>access_toke</strong> value and set the token value by pressing <strong>Authorize</strong> button from SwaggerUI.
         /// </remarks>
         /// <returns>Vehicle object created in database</returns>
         [HttpPost]
@@ -61,7 +62,7 @@ namespace VTS.Backend.Api.Controllers
         /// <remarks>
         /// Retrieves last recorded position in database for a registered vehicle.<br/>
         /// Only autheticated Admin can access this endpoint.<br/>
-        /// Admin role will be retrieved from JWT bearer token.
+        /// From <strong>Authorization</strong> section, use the Admin credentials to get an access token for Admin
         /// </remarks>
         /// <param name="VehicleId">Id of a registered vehicle</param>
         /// <returns>Vehicle position object</returns>
@@ -80,7 +81,7 @@ namespace VTS.Backend.Api.Controllers
         /// <remarks>
         /// Retrieve the positions of a vehicle during a certain time, in order to display their journey on a map (maps drawing is out of scope).<br/>
         /// Only Admin can access this endpoint.<br/>
-        /// Admin role will be retrieved from JWT bearer token.
+        /// From <strong>Authorization</strong> section, use the Admin credentials to get an access token for Admin
         /// </remarks>
         /// <param name="VehicleId">Id of a registered vehicle</param>
         /// <param name="FromTimeStampInSeconds">From: time stamp in seconds</param>
