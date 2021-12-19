@@ -1,5 +1,5 @@
 # Vehicle Tracking System
-Download and unzip the folder. Go to **vehicle-tracking-system\src** folder and open the solution file. Clean and rebuild the solution.
+Download and unzip the folder. Go to **src** folder and open **VTS.sln** the solution file with Visual Studio. Clean and rebuild the solution.
 
 ## Overview:
 There are two back end projects under this solution:
@@ -16,10 +16,9 @@ There are two back end projects under this solution:
 ## Run solution using Docker
 + Make sure Docker Desktop with Linux support is installed in your local machine.
 + Upate your Google api key
-  * Navigate to **vehicle-tracking-system\src** folder
-  * Open **docker-compose.yml** file
+  * Open **src\docker-compose.yml** file
   * Find **GoogleMapSettings__ApiKey** section and place your Google api key there
-+ From command line (Gitbash or PowerShell), navigate to **vehicle-tracking-system\src** folder
++ Navigate to **src** folder from PowerShell or GitBash
 + Execute commad: 
   * > docker-compose build
 + Execute below commad:
@@ -32,15 +31,16 @@ Backend server: http://localhost:5001
 ```
 
 ## Run solution from Visual Studio
-+ Start IdentityServer:
-    * Right click on **VTS.IdentityServer** project
-    * Select **Debug->Start New Instance**
++ Open **src\VTS.sln** file with Visual Studio
 + Upate your Google api key
   * Open **appsettings.Development.json** from **VTS.Backend.Api** project
   * Find **GoogleMapSettings** section and place your Google api key there
++ Start IdentityServer:
+    * Right click on **VTS.IdentityServer** project
+    * Select **Debug->Start New Instance**
 + Start Backend server project
     * Right click on **VTS.Backend.Api** project
-    * Select Debug->Start New Instance
+    * Select **Debug->Start New Instance**
 
 Both IdentityServer and Backend server should be launched automatically in the browser.
 
