@@ -59,4 +59,8 @@ To play with Vehicle endpoints, you must have a valid JWT access token. To get a
 
 **NB:** Make sure VTS.AuthServer (IdentityServer) is up and running upfront. Otherwise, token will not be generated/validated.
 
+## References:
+- [Multi-Container ASP.NET Core App with Docker Compose](https://www.yogihosting.com/docker-compose-aspnet-core/)
+- [Get JWT token from IdentityServer using Username/Password via rest api](https://briancaos.wordpress.com/2019/08/16/identityserver-use-identitymodel-to-get-user-token-and-user-info/)
+
 
