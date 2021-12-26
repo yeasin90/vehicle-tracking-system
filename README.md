@@ -12,6 +12,7 @@ There are two back end projects under this solution:
 - IdentityServer for Authentication/Authorization
 - In-memory data configuration in IdentityServer
 - Well integration fo Swagger with JWT authentication
+- API documentation with Swagger .xml file
 - Run both projects from single Docker compose file
 
 ## Pre-requisites:
