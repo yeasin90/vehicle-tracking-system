@@ -8,6 +8,12 @@ There are two back end projects under this solution:
 
 **VTS.AuthServer** is the IdentityServer for Authentication/Authorization. **VTS.Backend** is the backend server where required REST api endpoints are exposed.
 
+## Features:
+- IdentityServer for Authentication/Authorization
+- In-memory data configuration in IdentityServer
+- Well integration fo Swagger with JWT authentication
+- Run both projects from single Docker compose file
+
 ## Pre-requisites:
 - Visual Studio 2019 or higher
 - .net core 3.1 or higher
